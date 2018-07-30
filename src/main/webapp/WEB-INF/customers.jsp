@@ -57,10 +57,10 @@
                 <td>${customer.secondName}</td>
                 <td>${customer.birthday}</td>
                 <td>
-                    <a href="/customers/edit=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
+                    <a href="/customers/edit?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
                 <td>
-                    <a href="/customers/delete=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
+                    <a href="/customers/delete?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
                 </td>
             </tr>
         </c:forEach>
