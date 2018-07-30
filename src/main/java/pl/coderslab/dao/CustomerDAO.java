@@ -11,8 +11,8 @@ public class CustomerDAO {
 
     public static List<Customer> loadAll() {
 
+        String sql = "SELECT `id`, `first_name`, `second_name`, `birthday` FROM `customer`";
         try (Connection conn = DbUtil.getConn()) {
-            String sql = "SELECT id, first_name, second_name, birthday FROM customer;";
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             List<Customer> result = new ArrayList<>();
@@ -30,10 +30,10 @@ public class CustomerDAO {
         return Collections.emptyList();
     }
 
-    public static Customer loadById(int id){
+    public static Customer loadById(int id) {
 
+        String sql = "SELECT `first_name`, `second_name`, `birthday` FROM `customer` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
-            String sql = "SELECT first_name, second_name, birthday FROM customer WHERE id=?;";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
@@ -49,12 +49,11 @@ public class CustomerDAO {
         return null;
     }
 
-    public static int save(Customer customer){
-        if(customer != null){
-            if(customer.getId() == 0){
+    public static int save(Customer customer) {
+        if (customer != null) {
+            if (customer.getId() == 0) {
                 return insert(customer);
-            }
-            else {
+            } else {
                 return update(customer);
             }
         }
@@ -62,11 +61,56 @@ public class CustomerDAO {
     }
 
     private static int insert(Customer customer) {
+        String sql = "INSERT INTO `customers` (`name`, `surname`, `birth_date`) VALUES (?, ?, ?)";
+        try (Connection conn = DbUtil.getConn()) {
+            String[] generatedColumns = {"id"};
+            PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
+            st.setString(1, customer.getFirstName());
+            st.setString(2, customer.getSecondName());
+            st.setDate(3, (Date) customer.getBirthday());
+            st.executeQuery();
+            ResultSet res = st.getGeneratedKeys();
+            if (res.next()) {
+                return res.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
     private static int update(Customer customer) {
+        String sql = "UPDATE `customers` SET `name`=?, `surname`='?, `birth_date`=? WHERE `id`=?";
+        try (Connection conn = DbUtil.getConn()) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, customer.getFirstName());
+            st.setString(2, customer.getSecondName());
+            st.setDate(3, (Date) customer.getBirthday());
+            st.setInt(4, customer.getId());
+            if (st.executeUpdate() > 0) {
+                return customer.getId();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
 
+    }
+
+    public static int delete(Customer customer) {
+        String sql = "DELETE FROM `customers` WHERE `id`=?";
+        if (customer.getId() != 0) {
+            try (Connection conn = DbUtil.getConn()) {
+                PreparedStatement st = conn.prepareStatement(sql);
+                st.setInt(1, customer.getId());
+                int result = st.executeUpdate();
+                customer.setId(0);
+                return result;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return 0;
     }
 }
