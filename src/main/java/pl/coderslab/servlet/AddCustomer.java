@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,11 +25,14 @@ public class AddCustomer extends HttpServlet {
         try {
             birthday = sdf.parse(date);
         } catch (ParseException ignore) {
-            ignore.printStackTrace();
         }
-
         Customer customer = new Customer(firstName, secondName, birthday);
-        CustomerDAO.save(customer);
+
+        try {
+            CustomerDAO.save(customer);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         response.sendRedirect("/customers");
     }
 
