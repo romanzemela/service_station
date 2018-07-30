@@ -11,7 +11,7 @@ public class CustomerDAO {
 
     public static List<Customer> loadAll() {
 
-        String sql = "SELECT `id`, `first_name`, `second_name`, `birthday` FROM `customer`";
+        String sql = "SELECT `id`, `name`, `surname`, `birth_date` FROM `customers`";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -32,7 +32,7 @@ public class CustomerDAO {
 
     public static Customer loadById(int id) {
 
-        String sql = "SELECT `first_name`, `second_name`, `birthday` FROM `customer` WHERE `id`=?";
+        String sql = "SELECT `name`, `surname`, `birth_date` FROM `customers` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
@@ -67,8 +67,8 @@ public class CustomerDAO {
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
             st.setString(1, customer.getFirstName());
             st.setString(2, customer.getSecondName());
-            st.setDate(3, (Date) customer.getBirthday());
-            st.executeQuery();
+            st.setDate(3, new Date(customer.getBirthday().getTime()));
+            st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
                 return res.getInt(1);
