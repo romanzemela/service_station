@@ -82,12 +82,16 @@ public class CustomerDAO {
     }
 
     private static int update(Customer customer) throws SQLException {
-        String sql = "UPDATE `customers` SET `name`=?, `surname`='?, `birth_date`=? WHERE `id`=?";
+        String sql = "UPDATE `customers` SET `name`=?, `surname`=?, `birth_date`=? WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, customer.getFirstName());
             st.setString(2, customer.getSecondName());
-            st.setDate(3, (Date) customer.getBirthday());
+            if (customer.getBirthday() != null) {
+                st.setDate(3, new Date(customer.getBirthday().getTime()));
+            } else {
+                st.setDate(3, null);
+            }
             st.setInt(4, customer.getId());
             if (st.executeUpdate() > 0) {
                 return customer.getId();
