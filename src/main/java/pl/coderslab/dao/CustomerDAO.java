@@ -4,12 +4,11 @@ import pl.coderslab.model.Customer;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CustomerDAO {
 
-    public static List<Customer> loadAll() {
+    public static List<Customer> loadAll() throws SQLException {
 
         String sql = "SELECT `id`, `name`, `surname`, `birth_date` FROM `customers`";
         try (Connection conn = DbUtil.getConn()) {
@@ -25,12 +24,11 @@ public class CustomerDAO {
             }
             return result;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
-        return Collections.emptyList();
     }
 
-    public static Customer loadById(int id) {
+    public static Customer loadById(int id) throws SQLException {
 
         String sql = "SELECT `name`, `surname`, `birth_date` FROM `customers` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
@@ -44,12 +42,12 @@ public class CustomerDAO {
                 return new Customer(id, firstName, secondName, birthday);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
         return null;
     }
 
-    public static int save(Customer customer) {
+    public static int save(Customer customer) throws SQLException {
         if (customer != null) {
             if (customer.getId() == 0) {
                 return insert(customer);
@@ -60,26 +58,30 @@ public class CustomerDAO {
         return 0;
     }
 
-    private static int insert(Customer customer) {
+    private static int insert(Customer customer) throws SQLException {
         String sql = "INSERT INTO `customers` (`name`, `surname`, `birth_date`) VALUES (?, ?, ?)";
         try (Connection conn = DbUtil.getConn()) {
             String[] generatedColumns = {"id"};
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
             st.setString(1, customer.getFirstName());
             st.setString(2, customer.getSecondName());
-            st.setDate(3, new Date(customer.getBirthday().getTime()));
+            if (customer.getBirthday() != null) {
+                st.setDate(3, new Date(customer.getBirthday().getTime()));
+            } else {
+                st.setDate(3, null);
+            }
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
                 return res.getInt(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
         return 0;
     }
 
-    private static int update(Customer customer) {
+    private static int update(Customer customer) throws SQLException {
         String sql = "UPDATE `customers` SET `name`=?, `surname`='?, `birth_date`=? WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
@@ -91,13 +93,13 @@ public class CustomerDAO {
                 return customer.getId();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
         return 0;
 
     }
 
-    public static int delete(Customer customer) {
+    public static int delete(Customer customer) throws SQLException {
         String sql = "DELETE FROM `customers` WHERE `id`=?";
         if (customer.getId() != 0) {
             try (Connection conn = DbUtil.getConn()) {
@@ -107,7 +109,7 @@ public class CustomerDAO {
                 customer.setId(0);
                 return result;
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw e;
             }
         }
 
