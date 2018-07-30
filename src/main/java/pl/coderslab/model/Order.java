@@ -1,6 +1,6 @@
 package pl.coderslab.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Order {
     private int id;
@@ -53,7 +53,7 @@ public class Order {
         this.id = id;
     }
 
-    public Date getArrival_date() {
+    public java.sql.Date getArrival_date() {
         return arrival_date;
     }
 
@@ -61,7 +61,7 @@ public class Order {
         this.arrival_date = arrival_date;
     }
 
-    public Date getPlanned_repair_date() {
+    public java.sql.Date getPlanned_repair_date() {
         return planned_repair_date;
     }
 
@@ -69,7 +69,7 @@ public class Order {
         this.planned_repair_date = planned_repair_date;
     }
 
-    public Date getReal_repair_date() {
+    public java.sql.Date getReal_repair_date() {
         return real_repair_date;
     }
 
