@@ -140,4 +140,22 @@ public class Order {
     public void setWorkingHours(int workingHours) {
         this.workingHours = workingHours;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", arrivalDate=" + arrivalDate +
+                ", plannedRepairDate=" + plannedRepairDate +
+                ", realRepairDate=" + realRepairDate +
+                ", employee=" + employee +
+                ", problemDescription='" + problemDescription + '\'' +
+                ", repairDescription='" + repairDescription + '\'' +
+                ", status='" + status + '\'' +
+                ", vehicle=" + vehicle +
+                ", totalCost=" + totalCost +
+                ", partsCost=" + partsCost +
+                ", workingHours=" + workingHours +
+                '}';
+    }
 }

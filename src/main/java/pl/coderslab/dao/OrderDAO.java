@@ -1,5 +1,6 @@
 package pl.coderslab.dao;
 
+import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 
@@ -21,7 +22,7 @@ public class OrderDAO {
                 Date arrival_date = rs.getDate(2);
                 Date planned_repair_date = rs.getDate(3);
                 Date real_repair_date = rs.getDate(4);
-                Employee employee = EmployeeDAO.loadById(rs.getInt(5));
+               // Employee employee = EmployeeDAO.loadById(rs.getInt(5));
                 String problem_description = rs.getString(6);
                 String repair_description = rs.getString(7);
                 String status = rs.getString(8);
@@ -29,7 +30,7 @@ public class OrderDAO {
                 float total_cost = rs.getFloat(10);
                 float parts_cost = rs.getFloat(11);
                 int working_hours = rs.getInt(12);
-                result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
+                //result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
             }
             return result;
         } catch (SQLException e) {
@@ -83,7 +84,7 @@ public class OrderDAO {
             st.setDate(1, order.getArrivalDate());
             st.setDate(2, order.getPlannedRepairDate());
             st.setDate(3, order.getRealRepairDate());
-            st.setInt(4, order.getEmployee().getId());
+            //st.setInt(4, order.getEmployee().getId());
             st.setString(5, order.getProblemDescription());
             st.setString(6, order.getRepairDescription());
             st.setString(7, order.getStatus());
@@ -109,7 +110,7 @@ public class OrderDAO {
             st.setDate(1, order.getArrivalDate());
 
             if (order.getPlannedRepairDate() != null) {
-                st.setDate(2, new Date(order.getPlannedRepairDate().getTime());
+                st.setDate(2, new Date(order.getPlannedRepairDate().getTime()));
             } else {
                 st.setDate(2, null);
             }
@@ -119,7 +120,7 @@ public class OrderDAO {
             }else {
                 st.setDate(3,null);
             }
-            st.setInt(4, order.getEmployee().getId());
+            //st.setInt(4, order.getEmployee().getId());
             st.setString(5, order.getProblemDescription());
             st.setString(6, order.getRepairDescription());
             st.setString(7, order.getStatus());

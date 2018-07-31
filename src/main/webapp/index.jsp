@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ajtus
@@ -24,6 +25,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th></th>
             <th>Data przyjęcia<br>do naprawy</th>
             <th>Planowana data<br>rozpoczęcia naprawy</th>
             <th>Data rozpoczecia<br>naprawy</th>
@@ -35,20 +37,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>14-12-2017</td>
-            <td>12-06-2017</td>
-            <td></td>
-            <td>Janek</td>
-            <td>Czeka</td>
-            <td>200,00 zł</td>
-            <td>
-                <a href="#" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
-            </td>
-            <td>
-                <a href="#" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
-            </td>
-        </tr>
+        <c:forEach items="${orders}" var="order" varStatus="loop">
+            <tr>
+                <td>${loop.count}</td>
+                <td>${order.arrivalDate}</td>
+                <td>${order.plannedRepairDate}</td>
+                <td>${order.realRepairDate}</td>
+                <td>
+                    <a href="/orders/edit?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
+                </td>
+                <td>
+                    <a href="/orders/delete?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>
