@@ -23,44 +23,44 @@
         </ul>
     </div>
 </nav>
+
 <div class="container">
-    <h2>Edytowanie pracownika:</h2>
+    <h2>Dodawanie pracownika:</h2>
     <form class="form-horizontal" action="#" method="post">
-        <input type="number" hidden name="id" value="${employee.id}">
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Imię:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="name" placeholder="Wpisz imię..." name="name" value="${employee.name}" required>
+                <input type="text" class="form-control" id="name" placeholder="Wpisz imię..." name="name" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="surname">Nazwisko:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="surname" placeholder="Wpisz nazwisko..." name="surname" value="${employee.surname}" required>
+                <input type="text" class="form-control" id="surname" placeholder="Wpisz nazwisko..." name="surname" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="address">Adres:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="address" placeholder="Wpisz adres..." name="address" value="${employee.address}" required>
+                <input type="text" class="form-control" id="address" placeholder="Wpisz adres..." name="address" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="phone">Telefon:</label>
             <div class="col-sm-4">
-                <input type="number" min="0" class="form-control" id="phone" placeholder="Wpisz telefon..." name="phone" value="${employee.phone}" required>
+                <input type="number" class="form-control" min="0" id="phone" placeholder="Wpisz telefon..." name="phone" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="note">Uwagi:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="note" placeholder="Wpisz uwagi..." name="note" value="${employee.note}" required>
+                <input type="text" class="form-control" id="note" placeholder="Wpisz uwagi..." name="note" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="rate">Stawka godzinowa:</label>
             <div class="col-sm-4">
-                <input type="number" min="0.00" step="0.01" class="form-control" id="rate" placeholder="Wpisz stawkę..." name="rate" value="${employee.rate}" required>
+                <input type="number" min="0.00" step="0.01" class="form-control" id="rate" placeholder="Wpisz stawkę..." name="rate" required>
             </div>
         </div>
         <div class="form-group">
@@ -72,5 +72,6 @@
 </div>
 
 <%@ include file="fragments/footer.jsp" %>
+
 </body>
 </html>
