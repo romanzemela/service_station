@@ -22,6 +22,6 @@ public class Orders extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request,response);
     }
 }

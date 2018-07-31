@@ -22,7 +22,7 @@ public class OrderDAO {
                 Date arrival_date = rs.getDate(2);
                 Date planned_repair_date = rs.getDate(3);
                 Date real_repair_date = rs.getDate(4);
-               // Employee employee = EmployeeDAO.loadById(rs.getInt(5));
+                Employee employee = EmployeeDAO.loadById(rs.getInt(5));
                 String problem_description = rs.getString(6);
                 String repair_description = rs.getString(7);
                 String status = rs.getString(8);
@@ -30,7 +30,7 @@ public class OrderDAO {
                 float total_cost = rs.getFloat(10);
                 float parts_cost = rs.getFloat(11);
                 int working_hours = rs.getInt(12);
-                //result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
+                result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
             }
             return result;
         } catch (SQLException e) {
