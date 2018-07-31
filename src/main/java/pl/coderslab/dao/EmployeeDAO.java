@@ -1,9 +1,11 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Employee;
-import pl.coderslab.model.Order;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +69,7 @@ public class EmployeeDAO {
     }
 
     private static int insert(Employee employee) throws SQLException {
-        String sql = "INSERT INTO `employees` (`name`, `surname`, `address`, `phone`, `note`, `rate`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `employees` (`name`, `surname`, `address`, `phone`, `note`, `rate`) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DbUtil.getConn()) {
             String[] generatedColumns = {"id"};
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
@@ -126,4 +128,5 @@ public class EmployeeDAO {
         }
         return 0;
     }
+
 }

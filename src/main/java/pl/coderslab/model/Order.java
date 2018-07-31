@@ -1,6 +1,6 @@
 package pl.coderslab.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Order {
     private int id;
@@ -12,11 +12,11 @@ public class Order {
     private String repairDescription;
     private String status;
     private Vehicle vehicle;
-    private float totalCost;
-    private float partsCost;
+    private double totalCost;
+    private double partsCost;
     private int workingHours;
 
-    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, float totalCost, float partsCost, int workingHours) {
+    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
         this.id = id;
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
@@ -31,7 +31,7 @@ public class Order {
         this.workingHours = workingHours;
     }
 
-    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, float totalCost, float partsCost, int workingHours) {
+    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
         this.realRepairDate = realRepairDate;
@@ -117,19 +117,19 @@ public class Order {
         this.vehicle = vehicle;
     }
 
-    public float getTotalCost() {
+    public double getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(float totalCost) {
+    public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 
-    public float getPartsCost() {
+    public double getPartsCost() {
         return partsCost;
     }
 
-    public void setPartsCost(float partsCost) {
+    public void setPartsCost(double partsCost) {
         this.partsCost = partsCost;
     }
 

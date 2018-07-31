@@ -81,16 +81,31 @@ public class OrderDAO {
         try (Connection conn = DbUtil.getConn()) {
             String[] generatedColumns = {"id"};
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
-            st.setDate(1, order.getArrivalDate());
-            st.setDate(2, order.getPlannedRepairDate());
-            st.setDate(3, order.getRealRepairDate());
-            //st.setInt(4, order.getEmployee().getId());
+            if(order.getArrivalDate() != null){
+
+                st.setDate(1, new Date(order.getArrivalDate().getTime()));
+            }else {
+                st.setDate(1, null);
+            }
+
+            if (order.getPlannedRepairDate() != null) {
+                st.setDate(2, new Date(order.getPlannedRepairDate().getTime()));
+            } else {
+                st.setDate(2, null);
+            }
+
+            if (order.getRealRepairDate() != null){
+                st.setDate(3, new Date(order.getRealRepairDate().getTime()));
+            }else {
+                st.setDate(3,null);
+            }
+            st.setInt(4, order.getEmployee().getId());
             st.setString(5, order.getProblemDescription());
             st.setString(6, order.getRepairDescription());
             st.setString(7, order.getStatus());
             st.setInt(8, order.getVehicle().getId());
-            st.setFloat(9, order.getTotalCost());
-            st.setFloat(10, order.getPartsCost());
+            st.setDouble(9, order.getTotalCost());
+            st.setDouble(10, order.getPartsCost());
             st.setInt(11, order.getWorkingHours());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
@@ -107,7 +122,12 @@ public class OrderDAO {
         String sql = "UPDATE `orders` SET `arrival_date`=?, `planned_repair_date`=?, `real_repair_date`=?, `employees_id`=?, `problem_description`=?, `repair_description`=?, `status`=?, `vehicles_id`=?, `total_cost`=?, `parts_cost`=?, `working_hours`=? WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setDate(1, order.getArrivalDate());
+            if(order.getArrivalDate() != null){
+
+            st.setDate(1, new Date(order.getArrivalDate().getTime()));
+            }else {
+                st.setDate(1, null);
+            }
 
             if (order.getPlannedRepairDate() != null) {
                 st.setDate(2, new Date(order.getPlannedRepairDate().getTime()));
@@ -120,14 +140,16 @@ public class OrderDAO {
             }else {
                 st.setDate(3,null);
             }
-            //st.setInt(4, order.getEmployee().getId());
+            st.setInt(4, order.getEmployee().getId());
             st.setString(5, order.getProblemDescription());
             st.setString(6, order.getRepairDescription());
             st.setString(7, order.getStatus());
             st.setInt(8, order.getVehicle().getId());
-            st.setFloat(9, order.getTotalCost());
-            st.setFloat(10, order.getPartsCost());
+            st.setDouble(9, order.getTotalCost());
+            st.setDouble(10, order.getPartsCost());
             st.setInt(11, order.getWorkingHours());
+            st.setInt(12, order.getId());
+
             if (st.executeUpdate() > 0) {
                 return order.getId();
             }

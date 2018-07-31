@@ -13,8 +13,8 @@
             <a class="navbar-brand" href="/">Service Station CRM</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/">Naprawy</a></li>
-            <li><a href="employees">Pracownicy</a></li>
+            <li class="active"><a href="/">Naprawy</a></li>
+            <li><a href="/employees">Pracownicy</a></li>
             <li><a href="customers">Klienci</a></li>
         </ul>
     </div>
