@@ -2,6 +2,7 @@ package pl.coderslab.model;
 
 import java.time.Year;
 import java.util.Date;
+import java.util.Objects;
 
 public class Vehicle {
     private int id;
@@ -98,5 +99,25 @@ public class Vehicle {
                 ", nextInspectionDate=" + nextInspectionDate +
                 ", customer=" + customer +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return id == vehicle.id &&
+                Objects.equals(model, vehicle.model) &&
+                Objects.equals(brand, vehicle.brand) &&
+                Objects.equals(productionYear, vehicle.productionYear) &&
+                Objects.equals(plateNumber, vehicle.plateNumber) &&
+                Objects.equals(nextInspectionDate, vehicle.nextInspectionDate) &&
+                Objects.equals(customer, vehicle.customer);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, model, brand, productionYear, plateNumber, nextInspectionDate, customer);
     }
 }

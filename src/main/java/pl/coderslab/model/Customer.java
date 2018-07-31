@@ -1,6 +1,7 @@
 package pl.coderslab.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Customer {
 
@@ -62,5 +63,22 @@ public class Customer {
                 ", secondName='" + secondName + '\'' +
                 ", birthday=" + birthday +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return id == customer.id &&
+                Objects.equals(firstName, customer.firstName) &&
+                Objects.equals(secondName, customer.secondName) &&
+                Objects.equals(birthday, customer.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, firstName, secondName, birthday);
     }
 }
