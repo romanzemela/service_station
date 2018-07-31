@@ -1,6 +1,8 @@
 package pl.coderslab.model;
 
 
+import java.util.Objects;
+
 public class Employee {
 
     private int id;
@@ -97,6 +99,26 @@ public class Employee {
                 ", note='" + note + '\'' +
                 ", rate=" + rate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id &&
+                phone == employee.phone &&
+                Float.compare(employee.rate, rate) == 0 &&
+                Objects.equals(name, employee.name) &&
+                Objects.equals(surname, employee.surname) &&
+                Objects.equals(address, employee.address) &&
+                Objects.equals(note, employee.note);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name, surname, address, phone, note, rate);
     }
 }
 
