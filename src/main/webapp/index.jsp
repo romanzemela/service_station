@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<%@ include file="WEB-INF/fragments/menu.jsp"  %>
+<%@ include file="/WEB-INF/fragments/menu.jsp"  %>
 
 <div class="container">
     <h2>Aktualne naprawy: </h2>
@@ -53,7 +53,7 @@
     </table>
 </div>
 
-<%@ include file="WEB-INF/fragments/footer.jsp"  %>
+<%@ include file="/WEB-INF/fragments/footer.jsp"  %>
 
 </body>
 </html>
