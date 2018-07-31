@@ -13,7 +13,7 @@ import java.util.List;
 
 public class VehicleDAO {
     public static List<Vehicle> loadAll() throws SQLException {
-        String sql = "SELECT `id`, `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicle`";
+        String sql = "SELECT `id`, `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicles`";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
