@@ -22,11 +22,11 @@ public class VehicleDAO {
                 int id = rs.getInt(1);
                 String model = rs.getString(2);
                 String brand = rs.getString(3);
-                Year production_year = Year.of(rs.getInt(4));
-                String plate_number = rs.getString(5);
-                Date next_inpection_date = rs.getDate(6);
-                int client_id = rs.getInt(7);
-                result.add(new Vehicle(id, model, brand, production_year, plate_number, next_inpection_date, client_id));
+                Year productionYear = Year.of(rs.getInt(4));
+                String plateNumber = rs.getString(5);
+                Date nextInpectionDate = rs.getDate(6);
+                int customerId = rs.getInt(7);
+                result.add(new Vehicle(id, model, brand, productionYear, plateNumber, nextInpectionDate, CustomerDAO.loadById(customerId)));
             }
             return result;
         } catch (SQLException e) {
@@ -45,11 +45,11 @@ public class VehicleDAO {
             while (rs.next()) {
                 String model = rs.getString(1);
                 String brand = rs.getString(2);
-                Year production_year = Year.of(rs.getInt(3));
-                String plate_number = rs.getString(4);
-                Date next_inpection_date = rs.getDate(5);
-                int client_id = rs.getInt(6);
-                return new Vehicle(id, model, brand, production_year, plate_number, next_inpection_date, client_id);
+                Year productionYear = Year.of(rs.getInt(3));
+                String plateNumber = rs.getString(4);
+                Date nextInpectionDate = rs.getDate(5);
+                int customerId = rs.getInt(6);
+                return new Vehicle(id, model, brand, productionYear, plateNumber, nextInpectionDate, CustomerDAO.loadById(customerId));
             }
         } catch (SQLException e) {
             throw e;
@@ -74,10 +74,10 @@ public class VehicleDAO {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, vehicle.getModel());
             st.setString(2, vehicle.getBrand());
-            st.setInt(3, vehicle.getProduction_year()); //zamienić YEAR na int
-            st.setString(4, vehicle.getPlate_number());
-            st.setDate(5, (java.sql.Date) vehicle.getNext_inspection_date());
-            st.setInt(6, vehicle.getClient_id());
+            st.setInt(3, vehicle.getProductionYear().getValue());
+            st.setString(4, vehicle.getPlateNumber());
+            st.setDate(5, (java.sql.Date) vehicle.getNextInspectionDate());
+            st.setInt(6, vehicle.getCustomer().getId());
             st.setInt(7, vehicle.getId());
             if (st.executeUpdate() > 0) {
                 return vehicle.getId();
@@ -95,10 +95,10 @@ public class VehicleDAO {
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
             st.setString(1, vehicle.getModel());
             st.setString(2, vehicle.getBrand());
-            st.setInt(3, vehicle.getProduction_year()); //zamienić YEAR na int
-            st.setString(4, vehicle.getPlate_number());
-            st.setDate(5, (java.sql.Date) vehicle.getNext_inspection_date());
-            st.setInt(6, vehicle.getClient_id());
+            st.setInt(3, vehicle.getProductionYear().getValue());
+            st.setString(4, vehicle.getPlateNumber());
+            st.setDate(5, (java.sql.Date) vehicle.getNextInspectionDate());
+            st.setInt(6, vehicle.getCustomer().getId());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
