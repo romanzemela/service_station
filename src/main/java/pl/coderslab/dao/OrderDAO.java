@@ -1,6 +1,8 @@
 package pl.coderslab.dao;
 
+import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
+import pl.coderslab.model.Vehicle;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ public class OrderDAO {
 
     public static List<Order> loadAll() throws SQLException {
 
-        String sql = "SELECT `id`, `arrival_date`, `planned_repair_date`, `real_repair_date`, `emplyees_id`, `problem_description`, `reppair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` FROM `orders`";
+        String sql = "SELECT `id`, `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` FROM `orders`";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -20,15 +22,15 @@ public class OrderDAO {
                 Date arrival_date = rs.getDate(2);
                 Date planned_repair_date = rs.getDate(3);
                 Date real_repair_date = rs.getDate(4);
-                int emplyes_id = rs.getInt(5);
+                Employee employee = EmployeeDAO.loadById(rs.getInt(5));
                 String problem_description = rs.getString(6);
                 String repair_description = rs.getString(7);
                 String status = rs.getString(8);
-                int vehicles_id = rs.getInt(9);
+                Vehicle vehicle = VehicleDAO.loadById(rs.getInt(9));
                 float total_cost = rs.getFloat(10);
                 float parts_cost = rs.getFloat(11);
                 int working_hours = rs.getInt(12);
-                result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, emplyes_id, problem_description, repair_description, status, vehicles_id, total_cost, parts_cost, working_hours));
+                result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
             }
             return result;
         } catch (SQLException e) {
@@ -38,7 +40,7 @@ public class OrderDAO {
 
     public static Order loadById(int id) throws SQLException {
 
-        String sql = "SELECT `arrival_date`, `planned_repair_date`, `real_repair_date`, `emplyees_id`, `problem_description`, `reppair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`  FROM `orders` WHERE `id`=?";
+        String sql = "SELECT `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`  FROM `orders` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
@@ -47,15 +49,15 @@ public class OrderDAO {
                 Date arrival_date = rs.getDate(1);
                 Date planned_repair_date = rs.getDate(2);
                 Date real_repair_date = rs.getDate(3);
-                int emplyes_id = rs.getInt(4);
+                Employee employee = EmployeeDAO.loadById(rs.getInt(4));
                 String problem_description = rs.getString(5);
                 String repair_description = rs.getString(6);
                 String status = rs.getString(7);
-                int vehicles_id = rs.getInt(8);
+                Vehicle vehicle = VehicleDAO.loadById(rs.getInt(8));
                 float total_cost = rs.getFloat(9);
                 float parts_cost = rs.getFloat(10);
                 int working_hours = rs.getInt(11);
-                return new Order(id, arrival_date, planned_repair_date, real_repair_date, emplyes_id, problem_description, repair_description, status, vehicles_id, total_cost, parts_cost, working_hours);
+                return new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours);
             }
         } catch (SQLException e) {
             throw e;
@@ -75,21 +77,21 @@ public class OrderDAO {
     }
 
     private static int insert(Order order) throws SQLException {
-        String sql = "INSERT INTO `orders` (`arrival_date`, `planned_repair_date`, `real_repair_date`, `emplyees_id`, `problem_description`, `reppair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `orders` (`arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DbUtil.getConn()) {
             String[] generatedColumns = {"id"};
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
-            st.setDate(1, order.getArrival_date());
-            st.setDate(2, order.getPlanned_repair_date());
-            st.setDate(3, order.getReal_repair_date());
-            st.setInt(4, order.getEmployees_id());
-            st.setString(5, order.getProblem_description());
-            st.setString(6, order.getRepair_description());
+            st.setDate(1, order.getArrivalDate());
+            st.setDate(2, order.getPlannedRepairDate());
+            st.setDate(3, order.getRealRepairDate());
+            //st.setInt(4, order.getEmployee().getId());
+            st.setString(5, order.getProblemDescription());
+            st.setString(6, order.getRepairDescription());
             st.setString(7, order.getStatus());
-            st.setInt(8, order.getVehicles_id());
-            st.setFloat(9, order.getTotal_cost());
-            st.setFloat(10, order.getParts_cost());
-            st.setInt(11, order.getWorking_hours());
+            st.setInt(8, order.getVehicle().getId());
+            st.setFloat(9, order.getTotalCost());
+            st.setFloat(10, order.getPartsCost());
+            st.setInt(11, order.getWorkingHours());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
@@ -102,20 +104,30 @@ public class OrderDAO {
     }
 
     private static int update(Order order) throws SQLException {
-        String sql = "UPDATE `orders` SET `arrival_date`=?, `planned_repair_date`=?, `real_repair_date`=?, `emplyees_id`=?, `problem_description`=?, `reppair_description`=?, `status`=?, `vehicles_id`=?, `total_cost`=?, `parts_cost`=?, `working_hours`=? WHERE `id`=?";
+        String sql = "UPDATE `orders` SET `arrival_date`=?, `planned_repair_date`=?, `real_repair_date`=?, `employees_id`=?, `problem_description`=?, `repair_description`=?, `status`=?, `vehicles_id`=?, `total_cost`=?, `parts_cost`=?, `working_hours`=? WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setDate(1, order.getArrival_date());
-            st.setDate(2, order.getPlanned_repair_date());
-            st.setDate(3, order.getReal_repair_date());
-            st.setInt(4, order.getEmployees_id());
-            st.setString(5, order.getProblem_description());
-            st.setString(6, order.getRepair_description());
+            st.setDate(1, order.getArrivalDate());
+
+            if (order.getPlannedRepairDate() != null) {
+                st.setDate(2, new Date(order.getPlannedRepairDate().getTime()));
+            } else {
+                st.setDate(2, null);
+            }
+
+            if (order.getRealRepairDate() != null){
+                st.setDate(3, new Date(order.getRealRepairDate().getTime()));
+            }else {
+                st.setDate(3,null);
+            }
+            //st.setInt(4, order.getEmployee().getId());
+            st.setString(5, order.getProblemDescription());
+            st.setString(6, order.getRepairDescription());
             st.setString(7, order.getStatus());
-            st.setInt(8, order.getVehicles_id());
-            st.setFloat(9, order.getTotal_cost());
-            st.setFloat(10, order.getParts_cost());
-            st.setInt(11, order.getWorking_hours());
+            st.setInt(8, order.getVehicle().getId());
+            st.setFloat(9, order.getTotalCost());
+            st.setFloat(10, order.getPartsCost());
+            st.setInt(11, order.getWorkingHours());
             if (st.executeUpdate() > 0) {
                 return order.getId();
             }
