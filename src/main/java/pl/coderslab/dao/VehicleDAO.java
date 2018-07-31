@@ -37,7 +37,7 @@ public class VehicleDAO {
     }
 
     public static Vehicle loadById(int id) throws SQLException {
-        String sql = "SELECT `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicle` WHERE `id`=?";
+        String sql = "SELECT `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicles` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
