@@ -43,14 +43,14 @@
                 <td>${order.arrivalDate}</td>
                 <td>${order.plannedRepairDate}</td>
                 <td>${order.realRepairDate}</td>
-                <td>${order.employee}</td>
+                <td>${order.employee.name} ${order.employee.surname}</td>
                 <td>${order.status}</td>
                 <td>${order.totalCost}</td>
                 <td>
-                    <a href="/orders/edit?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
+                    <a href="/orders/edit?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
                 <td>
-                    <a href="/orders/delete?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
+                    <a href="/orders/delete?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
                 </td>
             </tr>
         </c:forEach>
