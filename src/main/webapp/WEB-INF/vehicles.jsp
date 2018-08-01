@@ -56,7 +56,6 @@
                 </td>
                 <td>
                     <a href="/vehicles/delete?id=${vehicle.id}" role="button"
-
                        class="btn btn-primary btn-sm m-0">Usuń</a>
                 </td>
             </tr>

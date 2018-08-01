@@ -2,9 +2,11 @@ package pl.coderslab.servlet;
 
 import pl.coderslab.dao.EmployeeDAO;
 import pl.coderslab.dao.OrderDAO;
+import pl.coderslab.dao.StatusDAO;
 import pl.coderslab.dao.VehicleDAO;
 import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
+import pl.coderslab.model.Status;
 import pl.coderslab.model.Vehicle;
 
 import javax.servlet.ServletException;
@@ -28,7 +30,12 @@ public class AddOrder extends HttpServlet {
         String plannedRepairDate = request.getParameter("plannedRepairDate");
         Integer employeeId = Integer.parseInt(request.getParameter("employee"));
         String problemDescription = request.getParameter("problemDescription");
-        String status = "Przyjęty";
+        Status status = null;
+        try {
+            status = StatusDAO.loadById(1);
+        } catch (SQLException ignore) {
+        }
+
         Integer vehicleId = Integer.parseInt(request.getParameter("vehicle"));
 
         Date arrivalDateDate = null;
