@@ -2,9 +2,11 @@ package pl.coderslab.servlet;
 
 import pl.coderslab.dao.EmployeeDAO;
 import pl.coderslab.dao.OrderDAO;
+import pl.coderslab.dao.StatusDAO;
 import pl.coderslab.dao.VehicleDAO;
 import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
+import pl.coderslab.model.Status;
 import pl.coderslab.model.Vehicle;
 
 import javax.servlet.ServletException;
@@ -29,7 +31,7 @@ public class EditOrder extends HttpServlet {
         Integer employeeId = Integer.parseInt(request.getParameter("employee"));
         String problemDescription = request.getParameter("problemDescription");
         String repairDescription = request.getParameter("repairDescription");
-        String status = request.getParameter("status");
+        int statusId = Integer.parseInt(request.getParameter("status"));
         Integer vehicleId = Integer.parseInt(request.getParameter("vehicle"));
         Double totalCost = Double.parseDouble(request.getParameter("totalCost"));
         Double partsCost = Double.parseDouble(request.getParameter("partsCost"));
@@ -48,7 +50,7 @@ public class EditOrder extends HttpServlet {
         }
         try {
             Order order = new Order(id, arrivalDateDate, plannedRepairDateDate, realRepairDateDate, EmployeeDAO.loadById(employeeId),
-                    problemDescription, repairDescription, status, VehicleDAO.loadById(vehicleId), totalCost, partsCost, workingHours);
+                    problemDescription, repairDescription, StatusDAO.loadById(statusId), VehicleDAO.loadById(vehicleId), totalCost, partsCost, workingHours);
             OrderDAO.save(order);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,17 +59,17 @@ public class EditOrder extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = 0;
-        Order order = null;
         try {
-            id = Integer.parseInt(request.getParameter("id"));
-            order = OrderDAO.loadById(id);
+            int id = Integer.parseInt(request.getParameter("id"));
+            Order order = OrderDAO.loadById(id);
             List<Employee> employees = EmployeeDAO.loadAll();
             List<Vehicle> vehicles = VehicleDAO.loadAll();
+            List<Status> statuses = StatusDAO.loadAll();
 
             request.setAttribute("order", order);
             request.setAttribute("employees", employees);
             request.setAttribute("vehicles", vehicles);
+            request.setAttribute("statuses", statuses);
             getServletContext().getRequestDispatcher("/WEB-INF/editOrder.jsp").forward(request, response);
         } catch (NumberFormatException ignore) {
         } catch (SQLException e) {
