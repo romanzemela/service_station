@@ -59,17 +59,17 @@ public class EditOrder extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = 0;
-        Order order = null;
         try {
-            id = Integer.parseInt(request.getParameter("id"));
-            order = OrderDAO.loadById(id);
+            int id = Integer.parseInt(request.getParameter("id"));
+            Order order = OrderDAO.loadById(id);
             List<Employee> employees = EmployeeDAO.loadAll();
             List<Vehicle> vehicles = VehicleDAO.loadAll();
+            List<Status> statuses = StatusDAO.loadAll();
 
             request.setAttribute("order", order);
             request.setAttribute("employees", employees);
             request.setAttribute("vehicles", vehicles);
+            request.setAttribute("statuses", statuses);
             getServletContext().getRequestDispatcher("/WEB-INF/editOrder.jsp").forward(request, response);
         } catch (NumberFormatException ignore) {
         } catch (SQLException e) {
