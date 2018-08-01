@@ -18,10 +18,32 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/fragments/menu.jsp"  %>
+<%@ include file="/WEB-INF/fragments/menu.jsp" %>
 
 <div class="container">
-    <h2>Aktualne naprawy: </h2>
+
+
+    <h2>Aktualne naprawy:</h2>
+    <form class="form-horizontal" action="/" method="get">
+        <div class="form-group">
+            <label class="control-label col-sm-1" for="employee">Pracownik:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="employee" name="employeeId" onchange="this.form.submit()">
+                    <option value="">Wybierz pracownika</option>
+                    <c:forEach items="${employees}" var="employee" varStatus="loop">
+                        <c:choose>
+                            <c:when test="${employee.id == param.employeeId}">
+                                <option value="${employee.id}" selected>${employee.name} ${employee.surname}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${employee.id}">${employee.name} ${employee.surname}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+    </form>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -58,7 +80,7 @@
     </table>
 </div>
 
-<%@ include file="/WEB-INF/fragments/footer.jsp"  %>
+<%@ include file="/WEB-INF/fragments/footer.jsp" %>
 
 </body>
 </html>

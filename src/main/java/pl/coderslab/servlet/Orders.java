@@ -1,6 +1,8 @@
 package pl.coderslab.servlet;
 
+import pl.coderslab.dao.EmployeeDAO;
 import pl.coderslab.dao.OrderDAO;
+import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
 
 import javax.servlet.ServletException;
@@ -31,10 +33,13 @@ public class Orders extends HttpServlet {
             if (orders == null) {
                 orders = OrderDAO.loadAll();
             }
+            List<Employee> employees = EmployeeDAO.loadAll();
+            request.setAttribute("employees", employees);
+            request.setAttribute("orders", orders);
+            getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        request.setAttribute("orders", orders);
-        getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
+
     }
 }
