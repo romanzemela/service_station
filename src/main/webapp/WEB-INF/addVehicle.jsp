@@ -37,7 +37,7 @@
             <label class="control-label col-sm-2" for="productionYear">Rok produkcji:</label>
             <div class="col-sm-4">
                 <input type="number" class="form-control" id="productionYear" name="productionYear"
-                       step="1" min="1800" max="${param.year}" required>
+                       step="1" min="1800" max="${year}" required>
             </div>
         </div>
         <div class="form-group">
