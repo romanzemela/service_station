@@ -25,7 +25,7 @@
         <h2 class="col-sm-11">Klienci: </h2>
     <div class="row">
         <div class="col-sm-11"></div>
-        <a href="/customers/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj klienta</a>
+        <a href="/customer/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj klienta</a>
     </div>
 
     <table class="table table-striped">
