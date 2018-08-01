@@ -41,7 +41,7 @@
             <label class="control-label col-sm-2" for="realRepairDate">Rzeczywista data naprawy:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" id="realRepairDate" name="realRepairDate"
-                       value="${order.realRepairDate}" required>
+                       value="${order.realRepairDate}">
             </div>
         </div>
 
@@ -79,7 +79,7 @@
             <div class="col-sm-4">
                 <textarea class="form-control" id="repairDescription" placeholder="Opis naprawy..."
                           name="repairDescription"
-                          rows="4" required>${order.repairDescription}</textarea>
+                          rows="4">${order.repairDescription}</textarea>
             </div>
         </div>
 
