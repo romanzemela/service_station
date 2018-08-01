@@ -53,20 +53,20 @@ public class VehicleDAO {
         return null;
     }
 
-    public static List<Vehicle> loadAllByCustomerId(int id) throws SQLException {
-        String sql = "SELECT `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicles` WHERE `client_id`=?";
+    public static List<Vehicle> loadAllByCustomerId(int customerId) throws SQLException {
+        String sql = "SELECT `id`, `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date` FROM `vehicles` WHERE `client_id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, id);
+            st.setInt(1, customerId);
             ResultSet rs = st.executeQuery();
             List<Vehicle> result = new ArrayList<>();
             while (rs.next()) {
-                String model = rs.getString(1);
-                String brand = rs.getString(2);
-                Year productionYear = Year.of(rs.getInt(3));
-                String plateNumber = rs.getString(4);
-                Date nextInpectionDate = rs.getDate(5);
-                int customerId = rs.getInt(6);
+                int id = Integer.parseInt(rs.getString(1));
+                String model = rs.getString(2);
+                String brand = rs.getString(3);
+                Year productionYear = Year.of(rs.getInt(4));
+                String plateNumber = rs.getString(5);
+                Date nextInpectionDate = rs.getDate(6);
                 result.add(new Vehicle(id, model, brand, productionYear, plateNumber, nextInpectionDate, CustomerDAO.loadById(customerId)));
             }
             return result;
