@@ -16,9 +16,12 @@ import java.util.List;
 public class Vehicles extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
     }
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
         List<Vehicle> vehicles = null;
         try {
@@ -27,6 +30,8 @@ public class Vehicles extends HttpServlet {
             e.printStackTrace();
         }
         request.setAttribute("vehicles", vehicles);
+        request.setAttribute("customer", request.getParameter("customer"));
         getServletContext().getRequestDispatcher("/WEB-INF/vehicles.jsp").forward(request, response);
+
     }
 }
