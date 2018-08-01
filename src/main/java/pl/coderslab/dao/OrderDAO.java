@@ -31,7 +31,7 @@ public class OrderDAO {
             ResultSet rs = st.executeQuery();
             List<Order> results = getOrdersFromResultSet(rs);
             if(!results.isEmpty()){
-                return results.get(1);
+                return results.get(0);
             }
         }
         return null;
