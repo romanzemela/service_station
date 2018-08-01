@@ -70,7 +70,7 @@
                 <td>${order.plannedRepairDate}</td>
                 <td>${order.realRepairDate}</td>
                 <td>${order.employee.name} ${order.employee.surname}</td>
-                <td>${order.status}</td>
+                <td>${order.status.name}</td>
                 <td>${order.totalCost}</td>
                 <td>
                     <a href="/orders/edit?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Edytuj</a>
