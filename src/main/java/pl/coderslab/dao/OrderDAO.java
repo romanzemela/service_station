@@ -16,51 +16,23 @@ public class OrderDAO {
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
-            List<Order> result = new ArrayList<>();
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                Date arrival_date = rs.getDate(2);
-                Date planned_repair_date = rs.getDate(3);
-                Date real_repair_date = rs.getDate(4);
-                Employee employee = EmployeeDAO.loadById(rs.getInt(5));
-                String problem_description = rs.getString(6);
-                String repair_description = rs.getString(7);
-                String status = rs.getString(8);
-                Vehicle vehicle = VehicleDAO.loadById(rs.getInt(9));
-                float total_cost = rs.getFloat(10);
-                float parts_cost = rs.getFloat(11);
-                int working_hours = rs.getInt(12);
-                result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
-            }
+            List<Order> result = getOrdersFromResultSet(rs);
             return result;
-        } catch (SQLException e) {
-            throw e;
         }
     }
 
+
     public static Order loadById(int id) throws SQLException {
 
-        String sql = "SELECT `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`  FROM `orders` WHERE `id`=?";
+        String sql = "SELECT `id`, `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` FROM `orders` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Date arrival_date = rs.getDate(1);
-                Date planned_repair_date = rs.getDate(2);
-                Date real_repair_date = rs.getDate(3);
-                Employee employee = EmployeeDAO.loadById(rs.getInt(4));
-                String problem_description = rs.getString(5);
-                String repair_description = rs.getString(6);
-                String status = rs.getString(7);
-                Vehicle vehicle = VehicleDAO.loadById(rs.getInt(8));
-                float total_cost = rs.getFloat(9);
-                float parts_cost = rs.getFloat(10);
-                int working_hours = rs.getInt(11);
-                return new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours);
+            List<Order> results = getOrdersFromResultSet(rs);
+            if(!results.isEmpty()){
+                return results.get(1);
             }
-        } catch (SQLException e) {
-            throw e;
         }
         return null;
     }
@@ -112,8 +84,6 @@ public class OrderDAO {
             if (res.next()) {
                 return res.getInt(1);
             }
-        } catch (SQLException e) {
-            throw e;
         }
         return 0;
     }
@@ -153,8 +123,6 @@ public class OrderDAO {
             if (st.executeUpdate() > 0) {
                 return order.getId();
             }
-        } catch (SQLException e) {
-            throw e;
         }
         return 0;
 
@@ -169,12 +137,44 @@ public class OrderDAO {
                 int result = st.executeUpdate();
                 order.setId(0);
                 return result;
-            } catch (SQLException e) {
-                throw e;
             }
         }
 
         return 0;
+    }
+
+    public static List<Order> loadByEmployeeId (int employee_id) throws SQLException {
+
+        String sql = "SELECT `id`, `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` FROM `orders` WHERE `employees_id`=?";
+        try (Connection conn = DbUtil.getConn()) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, employee_id);
+
+            ResultSet rs = st.executeQuery();
+            List<Order> result = getOrdersFromResultSet(rs);
+            return result;
+        }
+    }
+
+
+    private static List<Order> getOrdersFromResultSet(ResultSet rs) throws SQLException {
+        List<Order> result = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            Date arrival_date = rs.getDate(2);
+            Date planned_repair_date = rs.getDate(3);
+            Date real_repair_date = rs.getDate(4);
+            Employee employee = EmployeeDAO.loadById(rs.getInt(5));
+            String problem_description = rs.getString(6);
+            String repair_description = rs.getString(7);
+            String status = rs.getString(8);
+            Vehicle vehicle = VehicleDAO.loadById(rs.getInt(9));
+            float total_cost = rs.getFloat(10);
+            float parts_cost = rs.getFloat(11);
+            int working_hours = rs.getInt(12);
+            result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
+        }
+        return result;
     }
 
 }
