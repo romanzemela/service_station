@@ -51,11 +51,11 @@
                 <td>${vehicle.plateNumber}</td>
                 <td>${vehicle.nextInspectionDate}</td>
                 <td>
-                    <a href="/customers/edit?id=${customer.id}" role="button"
+                    <a href="/vehicles/edit?id=${vehicle.id}" role="button"
                        class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
                 <td>
-                    <a href="/customers/delete?id=${customer.id}" role="button"
+                    <a href="/hehicles/delete?id=${vehicle.id}" role="button"
                        class="btn btn-primary btn-sm m-0">Usuń</a>
                 </td>
             </tr>

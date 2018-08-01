@@ -2,13 +2,9 @@ package pl.coderslab.dao;
 
 import pl.coderslab.model.Vehicle;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class VehicleDAO {
@@ -91,14 +87,14 @@ public class VehicleDAO {
     }
 
     private static int update(Vehicle vehicle) throws SQLException {
-        String sql = "UPDATE `vehicles` SET `model`=?, `brand`=?, `production_year`=?, `plate_number`=?, `next_inspection_date`=?, `client_id`=? FROM `vehicles` WHERE `id`=?";
+        String sql = "UPDATE `vehicles` SET `model`=?, `brand`=?, `production_year`=?, `plate_number`=?, `next_inspection_date`=?, `client_id`=? WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, vehicle.getModel());
             st.setString(2, vehicle.getBrand());
             st.setInt(3, vehicle.getProductionYear().getValue());
             st.setString(4, vehicle.getPlateNumber());
-            st.setDate(5, (java.sql.Date) vehicle.getNextInspectionDate());
+            st.setDate(5, new Date(vehicle.getNextInspectionDate().getTime()));
             st.setInt(6, vehicle.getCustomer().getId());
             st.setInt(7, vehicle.getId());
             if (st.executeUpdate() > 0) {
@@ -111,7 +107,7 @@ public class VehicleDAO {
     }
 
     private static int insert(Vehicle vehicle) throws SQLException {
-        String sql = "INSERT INTO `vehcles`(`model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id`) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `vehicles`(`model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id`) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DbUtil.getConn()) {
             String[] generatedColumns = {"id"};
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
@@ -119,7 +115,7 @@ public class VehicleDAO {
             st.setString(2, vehicle.getBrand());
             st.setInt(3, vehicle.getProductionYear().getValue());
             st.setString(4, vehicle.getPlateNumber());
-            st.setDate(5, (java.sql.Date) vehicle.getNextInspectionDate());
+            st.setDate(5, new java.sql.Date(vehicle.getNextInspectionDate().getTime()));
             st.setInt(6, vehicle.getCustomer().getId());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();

@@ -47,7 +47,7 @@
                 <td>${customer.firstName}</td>
                 <td>${customer.secondName}</td>
                 <td>${customer.birthday}</td>
-                <td><form action="/vehicles" method="post"><input type="submit" name="customer" value="${customer.id}" class="btn btn-primary btn-sm m-0"></form></td>
+                <td><a href="/vehicles?customer=${customer.id}"role="button" class="btn btn-primary btn-sm m-0">Wyświetl pojazdy</a></td>
                 <td>
                     <a href="/customers/edit?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
