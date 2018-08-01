@@ -11,18 +11,7 @@
 </head>
 <body>
 
- <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Service Station CRM</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/">Naprawy</a></li>
-            <li class="active"><a href="/employees">Pracownicy</a></li>
-            <li><a href="/customers">Klienci</a></li>
-        </ul>
-    </div>
- </nav>
+<%@ include file="/WEB-INF/fragments/menu.jsp"  %>
 
  <div class="container">
     <h2>Dane szczegółowe pracownika:</h2>
