@@ -25,7 +25,7 @@
         <h2 class="col-sm-11">Klienci: </h2>
     <div class="row">
         <div class="col-sm-11"></div>
-        <a href="/customers/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj klienta</a>
+        <a href="/customer/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj klienta</a>
     </div>
 
     <table class="table table-striped">
@@ -35,9 +35,10 @@
             <th>Imie</th>
             <th>Nazwisko</th>
             <th>Data urodzenia</th>
-            <th>Pojazdy</th>
-            <th></th>
-            <th></th>
+            <th class="col-sm-1">Pojazdy</th>
+            <th class="col-sm-1"></th>
+            <th class="col-sm-1"></th>
+            <th class="col-sm-1"></th>
         </tr>
         </thead>
         <tbody>
@@ -47,12 +48,13 @@
                 <td>${customer.firstName}</td>
                 <td>${customer.secondName}</td>
                 <td>${customer.birthday}</td>
-                <td><form action="/vehicles" method="post"><input type="submit" name="customer" value="${customer.id}" class="btn btn-primary btn-sm m-0"></form></td>
+                <td><a href="/vehicles?customerId=${customer.id}"  class="btn btn-primary btn-sm m-0 btn-block">sam</a></td>
+                <td></td>
                 <td>
-                    <a href="/customers/edit?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
+                    <a href="/customers/edit?id=${customer.id}" role="button" class="btn btn-primary btn-sm m- btn-block">Edytuj</a>
                 </td>
                 <td>
-                    <a href="/customers/delete?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
+                    <a href="/customers/delete?id=${customer.id}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Usuń</a>
                 </td>
             </tr>
         </c:forEach>
