@@ -128,35 +128,4 @@ public class EmployeeDAO {
         return 0;
     }
 
-    public static List<Order> ordersForEmployeeId (int employess_id) throws SQLException {
-
-        String status = "W naprawie";
-        String sql = "select `id`, `arrival_date`, `planned_repair_date`,  `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` from `orders` where `employees_id`=? and `status`=?";
-        try (Connection conn = DbUtil.getConn()) {
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, employess_id);
-            st.setString(2, status);
-
-            ResultSet rs = st.executeQuery();
-            List<Order> result = new ArrayList<>();
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                Date arrival_date = rs.getDate(2);
-                Date planned_repair_date = rs.getDate(3);
-                Date real_repair_date = rs.getDate(4);
-                Employee employee = loadById(rs.getInt(5));
-                String problem_description = rs.getString(6);
-                String repair_description = rs.getString(7);
-                Vehicle vehicle = VehicleDAO.loadById(rs.getInt(8));
-                float total_cost = rs.getFloat(9);
-                float parts_cost = rs.getFloat(10);
-                int working_hours = rs.getInt(11);
-
-                result.add(new Order(id, arrival_date, planned_repair_date, real_repair_date, employee, problem_description, repair_description, status, vehicle, total_cost, parts_cost, working_hours));
-            }
-            return result;
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
 }
