@@ -24,7 +24,7 @@
             <label class="control-label col-sm-2" for="arrivalDate">Data przyjęcia:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" id="arrivalDate" name="arrivalDate" value="${arrivalDate}"
-                       disabled>
+                       readonly>
             </div>
         </div>
 
@@ -62,16 +62,6 @@
                 <textarea class="form-control" id="problemDescription" placeholder="Opis problemu..."
                           name="problemDescription"
                           rows="4" required>${order.problemDescription}</textarea>
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="status">Status:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="status" name="status"
-                       value="${order.status}" placeholder="Wpisz status..." required>
             </div>
         </div>
 
