@@ -18,8 +18,6 @@ public class OrderDAO {
             ResultSet rs = st.executeQuery();
             List<Order> result = getOrdersFromResultSet(rs);
             return result;
-        } catch (SQLException e) {
-            throw e;
         }
     }
 
@@ -35,8 +33,6 @@ public class OrderDAO {
             if(!results.isEmpty()){
                 return results.get(1);
             }
-        } catch (SQLException e) {
-            throw e;
         }
         return null;
     }
@@ -88,8 +84,6 @@ public class OrderDAO {
             if (res.next()) {
                 return res.getInt(1);
             }
-        } catch (SQLException e) {
-            throw e;
         }
         return 0;
     }
@@ -129,8 +123,6 @@ public class OrderDAO {
             if (st.executeUpdate() > 0) {
                 return order.getId();
             }
-        } catch (SQLException e) {
-            throw e;
         }
         return 0;
 
@@ -145,8 +137,6 @@ public class OrderDAO {
                 int result = st.executeUpdate();
                 order.setId(0);
                 return result;
-            } catch (SQLException e) {
-                throw e;
             }
         }
 
@@ -163,8 +153,6 @@ public class OrderDAO {
             ResultSet rs = st.executeQuery();
             List<Order> result = getOrdersFromResultSet(rs);
             return result;
-        } catch (SQLException e) {
-            throw e;
         }
     }
 
