@@ -10,14 +10,14 @@ public class Order {
     private Employee employee;
     private String problemDescription;
     private String repairDescription;
-    private String status;
+    private Status status;
     private Vehicle vehicle;
     private double totalCost;
     private double partsCost;
     private int workingHours;
 
 
-    public Order(Date arrivalDate, Date plannedRepairDate, Employee employee, String problemDescription, String status, Vehicle vehicle) {
+    public Order(Date arrivalDate, Date plannedRepairDate, Employee employee, String problemDescription, Status status, Vehicle vehicle) {
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
         this.employee = employee;
@@ -26,7 +26,7 @@ public class Order {
         this.vehicle = vehicle;
     }
 
-    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
+    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
         this.id = id;
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
@@ -41,7 +41,7 @@ public class Order {
         this.workingHours = workingHours;
     }
 
-    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
+    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
         this.realRepairDate = realRepairDate;
@@ -111,11 +111,11 @@ public class Order {
         this.repairDescription = repairDescription;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
