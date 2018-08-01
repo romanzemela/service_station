@@ -36,15 +36,16 @@ public class EditVehicle extends HttpServlet {
         }
 
         Integer customerId = Integer.parseInt(request.getParameter("customer"));
-
+        String redirectString = "/vehicles?customerId=";
         try {
             Vehicle vehicle = new Vehicle(id, model, brand, productionYear, plateNumber, nextInspectionDateDate, CustomerDAO.loadById(customerId));
             VehicleDAO.save(vehicle);
+            redirectString += vehicle.getCustomer().getId();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        response.sendRedirect("/customers");
+        response.sendRedirect(redirectString);
 
     }
 
