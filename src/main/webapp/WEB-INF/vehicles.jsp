@@ -55,11 +55,7 @@
                        class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
                 <td>
-<<<<<<< HEAD
                     <a href="/hehicles/delete?id=${vehicle.id}" role="button"
-=======
-                    <a href="/vehicles/delete?id=${vehicle.id}" role="button"
->>>>>>> 789fccc3463fdc69cf8b5ee1e3366a1a9b75c077
                        class="btn btn-primary btn-sm m-0">Usuń</a>
                 </td>
             </tr>
