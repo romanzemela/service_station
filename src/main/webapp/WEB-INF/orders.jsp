@@ -25,7 +25,7 @@
 
     <h2>Aktualne naprawy:</h2>
     <form class="form-horizontal" action="/" method="get">
-        <div class="form-group">
+        <div class="form-group col-sm-10">
             <label class="control-label col-sm-1" for="employee">Pracownik:</label>
             <div class="col-sm-3">
                 <select class="form-control" id="employee" name="employeeId" onchange="this.form.submit()">
@@ -43,6 +43,9 @@
                 </select>
             </div>
         </div>
+        <div class="col-sm-2">
+            <a href="/orders/add" role="button" class="btn btn-primary btn-sm m-0 btn-block">Dodaj Zlecenie</a>
+        </div>
     </form>
     <table class="table table-striped">
         <thead>
@@ -54,8 +57,9 @@
             <th>Pracownik</th>
             <th>Status</th>
             <th>Koszt naprawy</th>
-            <th></th>
-            <th></th>
+            <th class="col-sm-1">
+            </th>
+            <th class="col-sm-1"></th>
         </tr>
         </thead>
         <tbody>
@@ -69,10 +73,10 @@
                 <td>${order.status}</td>
                 <td>${order.totalCost}</td>
                 <td>
-                    <a href="/orders/edit?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
+                    <a href="/orders/edit?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Edytuj</a>
                 </td>
                 <td>
-                    <a href="/orders/delete?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
+                    <a href="/orders/delete?id=${order.id}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Usuń</a>
                 </td>
             </tr>
         </c:forEach>

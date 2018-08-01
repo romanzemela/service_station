@@ -16,6 +16,16 @@ public class Order {
     private double partsCost;
     private int workingHours;
 
+
+    public Order(Date arrivalDate, Date plannedRepairDate, Employee employee, String problemDescription, String status, Vehicle vehicle) {
+        this.arrivalDate = arrivalDate;
+        this.plannedRepairDate = plannedRepairDate;
+        this.employee = employee;
+        this.problemDescription = problemDescription;
+        this.status = status;
+        this.vehicle = vehicle;
+    }
+
     public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, String status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
         this.id = id;
         this.arrivalDate = arrivalDate;
