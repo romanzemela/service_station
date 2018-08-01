@@ -57,6 +57,28 @@ public class VehicleDAO {
         return null;
     }
 
+    public static List<Vehicle> loadAllByCustomerId(int id) throws SQLException {
+        String sql = "SELECT `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicles` WHERE `client_id`=?";
+        try (Connection conn = DbUtil.getConn()) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            List<Vehicle> result = new ArrayList<>();
+            while (rs.next()) {
+                String model = rs.getString(1);
+                String brand = rs.getString(2);
+                Year productionYear = Year.of(rs.getInt(3));
+                String plateNumber = rs.getString(4);
+                Date nextInpectionDate = rs.getDate(5);
+                int customerId = rs.getInt(6);
+                result.add(new Vehicle(id, model, brand, productionYear, plateNumber, nextInpectionDate, CustomerDAO.loadById(customerId)));
+            }
+            return result;
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public static int save(Vehicle vehicle) throws SQLException {
         if (vehicle != null) {
             if (vehicle.getId() == 0) {
@@ -69,7 +91,7 @@ public class VehicleDAO {
     }
 
     private static int update(Vehicle vehicle) throws SQLException {
-        String sql = "UPDATE `vehicles` SET `model`=?, `brand`=?, `production_year`=?, `plate_number`=?, `next_inspection_date`=?, `client_id`=? FROM `vehicle` WHERE `id`=?";
+        String sql = "UPDATE `vehicles` SET `model`=?, `brand`=?, `production_year`=?, `plate_number`=?, `next_inspection_date`=?, `client_id`=? FROM `vehicles` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, vehicle.getModel());
