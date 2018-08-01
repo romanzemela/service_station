@@ -23,7 +23,7 @@ public class StatusDAO {
 
     public static Status loadById(int id) throws SQLException {
 
-        String sql = "SELECT `id`, `name`  FROM `customers` WHERE `id`=?";
+        String sql = "SELECT `id`, `name`  FROM `status` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
