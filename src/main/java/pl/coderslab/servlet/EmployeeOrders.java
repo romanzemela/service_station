@@ -1,7 +1,6 @@
 package pl.coderslab.servlet;
 
-import pl.coderslab.dao.EmployeeDAO;
-import pl.coderslab.model.Employee;
+import pl.coderslab.dao.OrderDAO;
 import pl.coderslab.model.Order;
 
 import javax.servlet.ServletException;
@@ -19,7 +18,7 @@ public class EmployeeOrders extends HttpServlet {
         int id = 0;
         try {
             id = Integer.parseInt(request.getParameter("id"));
-            List<Order> orders = EmployeeDAO.ordersForEmployeeId(id);
+            List<Order> orders = OrderDAO.loadByEmployeeId(id);
             request.setAttribute("orders", orders);
             getServletContext().getRequestDispatcher("/WEB-INF/employeeOrders.jsp").forward(request,response);
         } catch (NumberFormatException ignore) {
