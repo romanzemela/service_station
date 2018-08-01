@@ -53,7 +53,7 @@
                     <a href="/employees/details?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Szczegóły</a>
                 </td>
                 <td>
-                    <a href="/orders/employeeId=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Zlecenia</a>
+                    <a href="/?employeeId=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Zlecenia</a>
                 </td>
                 <td>
                     <a href="/employees/edit?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
