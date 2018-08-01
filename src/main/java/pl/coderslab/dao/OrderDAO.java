@@ -24,7 +24,7 @@ public class OrderDAO {
 
     public static Order loadById(int id) throws SQLException {
 
-        String sql = "SELECT `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`  FROM `orders` WHERE `id`=?";
+        String sql = "SELECT `id`, `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` FROM `orders` WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
@@ -145,7 +145,7 @@ public class OrderDAO {
 
     public static List<Order> loadByEmployeeId (int employee_id) throws SQLException {
 
-        String sql = "SELECT `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours`  FROM `orders` WHERE `employeesId`=?";
+        String sql = "SELECT `id`, `arrival_date`, `planned_repair_date`, `real_repair_date`, `employees_id`, `problem_description`, `repair_description`, `status`, `vehicles_id`, `total_cost`, `parts_cost`, `working_hours` FROM `orders` WHERE `employees_id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, employee_id);
