@@ -25,7 +25,7 @@
     <h2 class="col-sm-11">Pojazdy: </h2>
     <div class="row">
         <div class="col-sm-11"></div>
-        <a href="/customers/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj Pojazd</a>
+        <a href="/vehicles/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj Pojazd</a>
     </div>
 
     <table class="table table-striped">
@@ -55,7 +55,11 @@
                        class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
                 <td>
+<<<<<<< HEAD
                     <a href="/hehicles/delete?id=${vehicle.id}" role="button"
+=======
+                    <a href="/vehicles/delete?id=${vehicle.id}" role="button"
+>>>>>>> 789fccc3463fdc69cf8b5ee1e3366a1a9b75c077
                        class="btn btn-primary btn-sm m-0">Usuń</a>
                 </td>
             </tr>

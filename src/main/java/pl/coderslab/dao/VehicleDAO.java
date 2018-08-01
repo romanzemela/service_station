@@ -53,7 +53,7 @@ public class VehicleDAO {
         return null;
     }
 
-    public static List<Vehicle> loadAllByClientId(int id) throws SQLException {
+    public static List<Vehicle> loadAllByCustomerId(int id) throws SQLException {
         String sql = "SELECT `model`, `brand`, `production_year`, `plate_number`, `next_inspection_date`, `client_id` FROM `vehicles` WHERE `client_id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);

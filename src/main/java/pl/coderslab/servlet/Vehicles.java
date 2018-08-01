@@ -15,24 +15,23 @@ import java.util.List;
 @WebServlet("/vehicles")
 public class Vehicles extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        vehicles(request, response);
+
 
     }
 
-    private void vehicles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         List<Vehicle> vehicles = null;
         try {
-            vehicles = VehicleDAO.loadAllByClientId(Integer.parseInt(request.getParameter("customer")));
+            vehicles = VehicleDAO.loadAllByCustomerId(Integer.parseInt(request.getParameter("customerId")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
         request.setAttribute("vehicles", vehicles);
         request.setAttribute("customer", request.getParameter("customer"));
         getServletContext().getRequestDispatcher("/WEB-INF/vehicles.jsp").forward(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        vehicles(request, response);
 
     }
 }
