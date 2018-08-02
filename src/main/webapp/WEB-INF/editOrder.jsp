@@ -122,13 +122,12 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="totalCost">Całkowity koszt:</label>
+            <label class="control-label col-sm-2" for="workingHours">Czas naprawy:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="totalCost" name="totalCost"
-                       value="${order.totalCost}" step="0.01" required>
+                <input type="number" class="form-control" id="workingHours" name="workingHours"
+                       value="${order.workingHours}" step="1" required>
             </div>
         </div>
-
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="partsCost">Koszt części:</label>
@@ -138,12 +137,11 @@
             </div>
         </div>
 
-
         <div class="form-group">
-            <label class="control-label col-sm-2" for="workingHours">Czas naprawy:</label>
+            <label class="control-label col-sm-2" for="totalCost">Całkowity koszt:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="workingHours" name="workingHours"
-                       value="${order.workingHours}" step="1" required>
+                <input type="number" class="form-control" id="totalCost" name="totalCost"
+                       value="${order.totalCost}" step="0.01" required>
             </div>
         </div>
 
