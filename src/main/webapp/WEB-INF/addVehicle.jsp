@@ -57,11 +57,12 @@
             <label class="control-label col-sm-2" for="customer">Klient:</label>
             <div class="col-sm-4">
                 <select class="form-control" id="customer" name="customer" required>
-                    <option value="">Wybierz klienta</option>
+                    <option selected disabled hidden style='display: none' value="">Wybierz klienta</option>
                     <c:forEach items="${customers}" var="customer" varStatus="loop">
                         <c:choose>
-                            <c:when test="${customer.id == vehicle.customer.id}">
-                                <option value="${customer.id}" selected>${customer.firstName} ${customer.secondName}</option>
+                            <c:when test="${customer.id == customerId}">
+                                <option value="${customer.id}"
+                                        selected>${customer.firstName} ${customer.secondName}</option>
                             </c:when>
                             <c:otherwise>
                                 <option value="${customer.id}">${customer.firstName} ${customer.secondName}</option>
