@@ -36,7 +36,7 @@ public class EditOrder extends HttpServlet {
         Integer vehicleId = Integer.parseInt(request.getParameter("vehicle"));
         BigDecimal totalCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("totalCost")));
         BigDecimal partsCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("partsCost")));
-        Integer workingHours = Integer.parseInt(request.getParameter("workingHours"));
+        BigDecimal workingHours = BigDecimal.valueOf(Double.parseDouble(request.getParameter("workingHours")));
 
 
         Date arrivalDateDate = null;
