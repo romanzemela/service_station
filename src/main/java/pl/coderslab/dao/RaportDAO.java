@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RaportDAO {
-    public static List<Raport1> Raport1() throws SQLException {
+    public static List<Raport1> getRaport1() throws SQLException {
 
         String sql = "select `employees.name`, `employees.surname`, sum(`orders.working_hours`) as `ilosc_roboczogodzin` from `orders` join `employees` on `employees.id` = `orders.employees_id` group by `orders.employees_id`";
         try (Connection conn = DbUtil.getConn()) {
