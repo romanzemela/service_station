@@ -17,6 +17,7 @@
             <li><a href="/employees">Pracownicy</a></li>
             <li><a href="/customers">Klienci</a></li>
             <li><a href="/vehicles">Samochody</a></li>
+            <li><a href="/raports">Raporty</a></li>
         </ul>
     </div>
 </nav>
