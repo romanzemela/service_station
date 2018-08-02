@@ -16,6 +16,7 @@
             <li><a href="/">Naprawy</a></li>
             <li><a href="/employees">Pracownicy</a></li>
             <li><a href="/customers">Klienci</a></li>
+            <li><a href="/vehicles">Samochody</a></li>
         </ul>
     </div>
 </nav>
