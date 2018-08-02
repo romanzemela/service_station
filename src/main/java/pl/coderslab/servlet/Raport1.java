@@ -14,7 +14,6 @@ import java.util.List;
 @WebServlet("/raport1")
 public class Raport1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +25,5 @@ public class Raport1 extends HttpServlet {
         }
         request.setAttribute("raport1s", raport1s);
         getServletContext().getRequestDispatcher("/WEB-INF/raport1.jsp").forward(request, response);
-
-
     }
 }

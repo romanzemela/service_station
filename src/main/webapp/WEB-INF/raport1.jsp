@@ -17,10 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 <%@ include file="/WEB-INF/fragments/menu.jsp" %>
-
-
 <div class="container">
     <h2 class="col-sm-11">Raport przepracowanych godzin: </h2>
 
