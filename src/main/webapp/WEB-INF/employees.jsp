@@ -49,7 +49,26 @@
                     <a href="/employees/edit?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Edytuj</a>
                 </td>
                 <td>
-                    <a href="/employees/delete?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-sm m-0" data-toggle="modal" data-target="#usun${employee.id}">
+                        Usuń
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade bd-example-modal-sm" id="usun${employee.id}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Czy na pewno chcesz usunąć?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-sm m-0" data-dismiss="modal">Nie</button>
+                                    <a href="/employees/delete?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Tak</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<a href="/employees/delete?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>-->
                 </td>
             </tr>
         </c:forEach>
