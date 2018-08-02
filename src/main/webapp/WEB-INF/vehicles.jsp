@@ -29,10 +29,10 @@
             <label class="control-label col-sm-1" for="customer">Pracownik:</label>
             <div class="col-sm-3">
                 <select class="form-control" id="customer" name="customerId" onchange="this.form.submit()">
-                    <option value="">Wybierz klienta</option>
+                    <option value=null>Wybierz klienta</option>
                     <c:forEach items="${customers}" var="customer" varStatus="loop">
                         <c:choose>
-                            <c:when test="${customer.id == param.customerId}">
+                            <c:when test="${customer.id == customerId}">
                                 <option value="${customer.id}" selected>${customer.firstName} ${customer.secondName}</option>
                             </c:when>
                             <c:otherwise>
