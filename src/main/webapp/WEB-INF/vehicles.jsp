@@ -23,10 +23,32 @@
 
 <div class="container">
     <h2 class="col-sm-11">Pojazdy: </h2>
-    <div class="row">
-        <div class="col-sm-11"></div>
-        <a href="/vehicles/add" role="button" class="btn btn-primary btn-sm m-0 col-sm-1">Dodaj Pojazd</a>
-    </div>
+
+    <form class="form-horizontal" action="/vehicles" method="get">
+        <div class="form-group col-sm-10">
+            <label class="control-label col-sm-1" for="customer">Pracownik:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="customer" name="customerId" onchange="this.form.submit()">
+                    <option value="">Wybierz klienta</option>
+                    <c:forEach items="${customers}" var="customer" varStatus="loop">
+                        <c:choose>
+                            <c:when test="${customer.id == param.customerId}">
+                                <option value="${customer.id}" selected>${customer.firstName} ${customer.secondName}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${customer.id}">${customer.firstName} ${customer.secondName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <a href="/vehicles/add" role="button" class="btn btn-primary btn-sm m-0 btn-block">Dodaj Pojazd</a>
+        </div>
+    </form>
+
+
 
     <table class="table table-striped">
         <thead>
