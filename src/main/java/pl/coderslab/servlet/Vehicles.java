@@ -24,6 +24,7 @@ public class Vehicles extends HttpServlet {
         List<Vehicle> vehicles = Collections.emptyList();
         try {
             customerId = Integer.parseInt(request.getParameter("customerId"));
+            request.setAttribute("customerId", customerId);
         } catch (NumberFormatException ignore) {
         }
         try {

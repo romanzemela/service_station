@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,13 @@ public class AddVehicle extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        try {
+            int customerId = Integer.parseInt(request.getParameter("customerId"));
+            request.setAttribute("customerId", customerId);
+        } catch (NumberFormatException ignore) {
+        }
+
         try {
             List<Customer> customers = CustomerDAO.loadAll();
             List<Vehicle> vehicles = VehicleDAO.loadAll();
