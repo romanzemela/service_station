@@ -89,7 +89,7 @@ CREATE TABLE `orders` (
   `vehicles_id` int(11) NOT NULL,
   `total_cost` float(7,2) DEFAULT NULL,
   `parts_cost` float(7,2) DEFAULT NULL,
-  `working_hours` int(11) DEFAULT NULL,
+  `working_hours` float(7,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `employees_id` (`employees_id`),
   KEY `status_id` (`status_id`),
@@ -106,7 +106,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (6,'2018-08-01','2018-08-01',NULL,2,'Nie odpala','',3,2,0.00,0.00,0),(7,'2018-08-01','2018-08-01',NULL,3,'Dymi na dużych obrotach','',1,3,0.00,0.00,0),(9,'2018-08-02','2018-08-02',NULL,3,'Nie odpala',NULL,1,4,0.00,0.00,0);
+INSERT INTO `orders` VALUES (6,'2018-08-01','2018-08-01',NULL,2,'Nie odpala','',3,2,113.22,5.22,2.00),(7,'2018-08-01','2018-08-01',NULL,3,'Dymi na dużych obrotach','',1,3,284.00,210.00,2.00),(9,'2018-08-02','2018-08-02',NULL,3,'Nie odpala','',1,4,38.01,1.01,1.00);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-02  9:15:57
+-- Dump completed on 2018-08-02 13:23:18

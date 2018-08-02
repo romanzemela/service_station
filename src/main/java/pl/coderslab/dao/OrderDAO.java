@@ -80,7 +80,7 @@ public class OrderDAO {
             st.setInt(8, order.getVehicle().getId());
             st.setBigDecimal(9, order.getTotalCost());
             st.setBigDecimal(10, order.getPartsCost());
-            st.setInt(11, order.getWorkingHours());
+            st.setBigDecimal(11, order.getWorkingHours());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
@@ -119,7 +119,7 @@ public class OrderDAO {
             st.setInt(8, order.getVehicle().getId());
             st.setBigDecimal(9, order.getTotalCost());
             st.setBigDecimal(10, order.getPartsCost());
-            st.setInt(11, order.getWorkingHours());
+            st.setBigDecimal(11, order.getWorkingHours());
             st.setInt(12, order.getId());
 
             if (st.executeUpdate() > 0) {
@@ -173,7 +173,7 @@ public class OrderDAO {
             Vehicle vehicle = VehicleDAO.loadById(rs.getInt(9));
             BigDecimal totalCost = rs.getBigDecimal(10);
             BigDecimal partsCost = rs.getBigDecimal(11);
-            int workingHours = rs.getInt(12);
+            BigDecimal workingHours = rs.getBigDecimal(12);
             result.add(new Order(id, arrivalDate, plannedRepairDate, realRepairDate, employee, problemDescription, repairDescription, StatusDAO.loadById(statusId), vehicle, totalCost, partsCost, workingHours));
         }
         return result;

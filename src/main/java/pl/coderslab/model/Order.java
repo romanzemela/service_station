@@ -15,7 +15,7 @@ public class Order {
     private Vehicle vehicle;
     private BigDecimal totalCost;
     private BigDecimal partsCost;
-    private int workingHours;
+    private BigDecimal workingHours;
 
 
     public Order(Date arrivalDate, Date plannedRepairDate, Employee employee, String problemDescription, Status status, Vehicle vehicle) {
@@ -27,7 +27,7 @@ public class Order {
         this.vehicle = vehicle;
     }
 
-    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, BigDecimal totalCost, BigDecimal partsCost, int workingHours) {
+    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, BigDecimal totalCost, BigDecimal partsCost, BigDecimal workingHours) {
         this.id = id;
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
@@ -42,7 +42,7 @@ public class Order {
         this.workingHours = workingHours;
     }
 
-    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, BigDecimal totalCost, BigDecimal partsCost, int workingHours) {
+    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, BigDecimal totalCost, BigDecimal partsCost, BigDecimal workingHours) {
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
         this.realRepairDate = realRepairDate;
@@ -144,11 +144,11 @@ public class Order {
         this.partsCost = partsCost;
     }
 
-    public int getWorkingHours() {
+    public BigDecimal getWorkingHours() {
         return workingHours;
     }
 
-    public void setWorkingHours(int workingHours) {
+    public void setWorkingHours(BigDecimal workingHours) {
         this.workingHours = workingHours;
     }
 

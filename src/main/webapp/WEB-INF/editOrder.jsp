@@ -22,7 +22,6 @@
             var workingHours = $("#workingHours").val();
             var employeeId = $("#employee").val();
             var hourCost = employees[employeeId].price;
-            // $("#totalCost").val(hourCost * workingHours + parts);
             $("#totalCost").val(workingHours * hourCost + parts);
         });
     </script>
@@ -142,7 +141,7 @@
             <label class="control-label col-sm-2" for="workingHours">Czas naprawy:</label>
             <div class="col-sm-4">
                 <input type="number" class="form-control summand" id="workingHours" name="workingHours"
-                       value="${order.workingHours}" step="1" required>
+                       value="${order.workingHours}" step="0.1" min="0" required>
             </div>
         </div>
 
@@ -158,7 +157,7 @@
             <label class="control-label col-sm-2" for="totalCost">Całkowity koszt:</label>
             <div class="col-sm-4">
                 <input type="number" class="form-control" id="totalCost" name="totalCost"
-                       value="${order.totalCost}" step="0.01" readonly required>
+                       value="${order.totalCost}" step="0.01" min="0" readonly required>
             </div>
         </div>
 
