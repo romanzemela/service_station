@@ -44,7 +44,14 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <a href="/vehicles/add" role="button" class="btn btn-primary btn-sm m-0 btn-block">Dodaj Pojazd</a>
+            <c:choose>
+                <c:when test="${customerId != null}">
+                    <a href="/vehicles/add?customerId=${customerId}" role="button" class="btn btn-primary btn-sm m-0 btn-block">Dodaj Pojazd</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/vehicles/add" role="button" class="btn btn-primary btn-sm m-0 btn-block">Dodaj Pojazd</a>
+                </c:otherwise>
+            </c:choose>
         </div>
     </form>
 
