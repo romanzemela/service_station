@@ -23,14 +23,14 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="model">Model:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" name="model" required>
+                <input type="text" class="form-control" id="model" name="model" pattern="^[a-zA-Z]{3,}" required>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="brand">Marka:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="brand" name="brand" required>
+                <input type="text" class="form-control" id="brand" name="brand" pattern="^[a-zA-Z]{3,}" required>
             </div>
         </div>
         <div class="form-group">
