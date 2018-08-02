@@ -64,6 +64,7 @@ public class AddVehicle extends HttpServlet {
             request.setAttribute("customers", customers);
             int year = Calendar.getInstance().get(Calendar.YEAR);
             request.setAttribute("year", year);
+            request.setAttribute("date", sdf.format(new Date()));
             request.setAttribute("vehicles", vehicles);
             getServletContext().getRequestDispatcher("/WEB-INF/addVehicle.jsp").forward(request, response);
         } catch (SQLException e) {
