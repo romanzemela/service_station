@@ -5,6 +5,7 @@ import pl.coderslab.model.Order;
 import pl.coderslab.model.Status;
 import pl.coderslab.model.Vehicle;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,9 +78,9 @@ public class OrderDAO {
             st.setString(6, order.getRepairDescription());
             st.setInt(7, order.getStatus().getId());
             st.setInt(8, order.getVehicle().getId());
-            st.setDouble(9, order.getTotalCost());
-            st.setDouble(10, order.getPartsCost());
-            st.setInt(11, order.getWorkingHours());
+            st.setBigDecimal(9, order.getTotalCost());
+            st.setBigDecimal(10, order.getPartsCost());
+            st.setBigDecimal(11, order.getWorkingHours());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
@@ -116,9 +117,9 @@ public class OrderDAO {
             st.setString(6, order.getRepairDescription());
             st.setInt(7, order.getStatus().getId());
             st.setInt(8, order.getVehicle().getId());
-            st.setDouble(9, order.getTotalCost());
-            st.setDouble(10, order.getPartsCost());
-            st.setInt(11, order.getWorkingHours());
+            st.setBigDecimal(9, order.getTotalCost());
+            st.setBigDecimal(10, order.getPartsCost());
+            st.setBigDecimal(11, order.getWorkingHours());
             st.setInt(12, order.getId());
 
             if (st.executeUpdate() > 0) {
@@ -170,9 +171,9 @@ public class OrderDAO {
             String repairDescription = rs.getString(7);
             int statusId = rs.getInt(8);
             Vehicle vehicle = VehicleDAO.loadById(rs.getInt(9));
-            float totalCost = rs.getFloat(10);
-            float partsCost = rs.getFloat(11);
-            int workingHours = rs.getInt(12);
+            BigDecimal totalCost = rs.getBigDecimal(10);
+            BigDecimal partsCost = rs.getBigDecimal(11);
+            BigDecimal workingHours = rs.getBigDecimal(12);
             result.add(new Order(id, arrivalDate, plannedRepairDate, realRepairDate, employee, problemDescription, repairDescription, StatusDAO.loadById(statusId), vehicle, totalCost, partsCost, workingHours));
         }
         return result;

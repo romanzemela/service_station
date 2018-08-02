@@ -9,6 +9,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).on("change", ".summand", function () {
+            var employees = {
+                <c:forEach items="${employees}" var="employee">
+                ${employee.id}: {
+                    price: ${employee.rate}
+                },
+                </c:forEach>
+            }
+            var parts = Number($("#partsCost").val());
+            var workingHours = $("#workingHours").val();
+            var employeeId = $("#employee").val();
+            var hourCost = employees[employeeId].price;
+            $("#totalCost").val(workingHours * hourCost + parts);
+        });
+    </script>
 </head>
 <body>
 
@@ -48,14 +64,14 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="employee">Pracownik:</label>
             <div class="col-sm-4">
-                <select class="form-control" id="employee" name="employee" required>
+                <select class="form-control summand" id="employee" name="employee" required>
                     <c:forEach items="${employees}" var="employee" varStatus="loop">
                         <c:choose>
                             <c:when test="${employee.id == order.employee.id}">
-                                <option value="${employee.id}" selected>${employee.name} ${employee.surname}</option>
+                                <option value="${employee.id}" selected>${employee.name} ${employee.surname} - ${employee.rate} zł/h</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${employee.id}">${employee.name} ${employee.surname}</option>
+                                <option value="${employee.id}">${employee.name} ${employee.surname} - ${employee.rate} zł/h</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -122,28 +138,26 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="totalCost">Całkowity koszt:</label>
+            <label class="control-label col-sm-2" for="workingHours">Czas naprawy:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="totalCost" name="totalCost"
-                       value="${order.totalCost}" step="0.01" required>
+                <input type="number" class="form-control summand" id="workingHours" name="workingHours"
+                       value="${order.workingHours}" step="0.1" min="0" required>
             </div>
         </div>
-
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="partsCost">Koszt części:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="partsCost" name="partsCost"
-                       value="${order.partsCost}" step="0.01" required>
+                <input type="number" class="form-control summand" id="partsCost" name="partsCost"
+                       value="${order.partsCost}" step="0.01" min="0" required>
             </div>
         </div>
 
-
         <div class="form-group">
-            <label class="control-label col-sm-2" for="workingHours">Czas naprawy:</label>
+            <label class="control-label col-sm-2" for="totalCost">Całkowity koszt:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="workingHours" name="workingHours"
-                       value="${order.workingHours}" step="1" required>
+                <input type="number" class="form-control" id="totalCost" name="totalCost"
+                       value="${order.totalCost}" step="0.01" min="0" readonly required>
             </div>
         </div>
 

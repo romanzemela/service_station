@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,9 +34,9 @@ public class EditOrder extends HttpServlet {
         String repairDescription = request.getParameter("repairDescription");
         int statusId = Integer.parseInt(request.getParameter("status"));
         Integer vehicleId = Integer.parseInt(request.getParameter("vehicle"));
-        Double totalCost = Double.parseDouble(request.getParameter("totalCost"));
-        Double partsCost = Double.parseDouble(request.getParameter("partsCost"));
-        Integer workingHours = Integer.parseInt(request.getParameter("workingHours"));
+        BigDecimal totalCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("totalCost")));
+        BigDecimal partsCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("partsCost")));
+        BigDecimal workingHours = BigDecimal.valueOf(Double.parseDouble(request.getParameter("workingHours")));
 
 
         Date arrivalDateDate = null;
