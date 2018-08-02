@@ -146,7 +146,7 @@ CREATE TABLE `vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `model` varchar(255) NOT NULL,
   `brand` varchar(255) NOT NULL,
-  `production_year` year(4) NOT NULL,
+  `production_year` int(4) NOT NULL,
   `plate_number` varchar(10) NOT NULL,
   `next_inspection_date` date NOT NULL,
   `client_id` int(11) NOT NULL,

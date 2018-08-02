@@ -23,21 +23,21 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="model">Model:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" name="model" required>
+                <input type="text" class="form-control" id="model" name="model" pattern="^[a-zA-Z]{3,}" required>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="brand">Marka:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="brand" name="brand" required>
+                <input type="text" class="form-control" id="brand" name="brand" pattern="^[a-zA-Z]{3,}" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="productionYear">Rok produkcji:</label>
             <div class="col-sm-4">
                 <input type="number" class="form-control" id="productionYear" name="productionYear"
-                       step="1" min="1800" max="${year}" required>
+                       step="1" min="1900" max="${year}" value="${year}" required>
             </div>
         </div>
         <div class="form-group">
@@ -50,7 +50,7 @@
             <label class="control-label col-sm-2" for="nextInspectionDate">Data następnej inspekcji:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" id="nextInspectionDate" name="nextInspectionDate"
-                       required>
+                       min="${date}" value="${date}" required>
             </div>
         </div>
         <div class="form-group">
