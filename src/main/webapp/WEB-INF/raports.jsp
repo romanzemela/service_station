@@ -27,7 +27,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-        
+
             <th>Raport</th>
             <th class="col-sm-1"></th>
         <tr>
