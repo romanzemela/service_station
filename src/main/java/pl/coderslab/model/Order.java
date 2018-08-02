@@ -1,5 +1,6 @@
 package pl.coderslab.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Order {
@@ -12,8 +13,8 @@ public class Order {
     private String repairDescription;
     private Status status;
     private Vehicle vehicle;
-    private double totalCost;
-    private double partsCost;
+    private BigDecimal totalCost;
+    private BigDecimal partsCost;
     private int workingHours;
 
 
@@ -26,7 +27,7 @@ public class Order {
         this.vehicle = vehicle;
     }
 
-    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
+    public Order(int id, Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, BigDecimal totalCost, BigDecimal partsCost, int workingHours) {
         this.id = id;
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
@@ -41,7 +42,7 @@ public class Order {
         this.workingHours = workingHours;
     }
 
-    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, double totalCost, double partsCost, int workingHours) {
+    public Order(Date arrivalDate, Date plannedRepairDate, Date realRepairDate, Employee employee, String problemDescription, String repairDescription, Status status, Vehicle vehicle, BigDecimal totalCost, BigDecimal partsCost, int workingHours) {
         this.arrivalDate = arrivalDate;
         this.plannedRepairDate = plannedRepairDate;
         this.realRepairDate = realRepairDate;
@@ -127,19 +128,19 @@ public class Order {
         this.vehicle = vehicle;
     }
 
-    public double getTotalCost() {
+    public BigDecimal getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(double totalCost) {
+    public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
     }
 
-    public double getPartsCost() {
+    public BigDecimal getPartsCost() {
         return partsCost;
     }
 
-    public void setPartsCost(double partsCost) {
+    public void setPartsCost(BigDecimal partsCost) {
         this.partsCost = partsCost;
     }
 
