@@ -97,7 +97,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk1` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
   CONSTRAINT `orders_ibfk2` FOREIGN KEY (`employees_id`) REFERENCES `employees` (`id`),
   CONSTRAINT `orders_ibfk3` FOREIGN KEY (`vehicles_id`) REFERENCES `vehicles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +106,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (6,'2018-08-01','2018-08-01',NULL,1,'Nie odpala','',3,2,0.00,0.00,0);
+INSERT INTO `orders` VALUES (6,'2018-08-01','2018-08-01',NULL,2,'Nie odpala','',3,2,0.00,0.00,0),(7,'2018-08-01','2018-08-01',NULL,3,'Dymi na dużych obrotach','',1,3,0.00,0.00,0),(9,'2018-08-02','2018-08-02',NULL,3,'Nie odpala',NULL,1,4,0.00,0.00,0);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,14 +147,14 @@ CREATE TABLE `vehicles` (
   `model` varchar(255) NOT NULL,
   `brand` varchar(255) NOT NULL,
   `production_year` year(4) NOT NULL,
-  `plate_number` varchar(7) NOT NULL,
+  `plate_number` varchar(10) NOT NULL,
   `next_inspection_date` date NOT NULL,
   `client_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `plate_number` (`plate_number`),
   KEY `client_id` (`client_id`),
   CONSTRAINT `vehicles_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `vehicles` (
 
 LOCK TABLES `vehicles` WRITE;
 /*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
-INSERT INTO `vehicles` VALUES (2,'Focus','Ford',2017,'ZXZ0987','2018-11-25',1),(3,'truck','MAN',2011,'DOS456X','2018-07-21',3);
+INSERT INTO `vehicles` VALUES (2,'Focus','Ford',2017,'ZXZ0987','2018-11-24',2),(3,'truck','MAN',2011,'DOS456X','2018-07-21',3),(4,'Zafira','Opel',2000,'SK 8765','2018-08-25',3),(5,'Zafira','Opel',2017,'SK876','2018-08-26',11);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-01 16:11:31
+-- Dump completed on 2018-08-02  9:15:57
