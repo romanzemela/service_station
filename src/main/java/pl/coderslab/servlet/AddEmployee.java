@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -22,7 +23,7 @@ public class AddEmployee extends HttpServlet {
     String address = request.getParameter("address");
     int phone = Integer.parseInt(request.getParameter("phone"));
     String note = request.getParameter("note");
-    float rate = Float.parseFloat(request.getParameter("rate"));
+    BigDecimal rate = BigDecimal.valueOf(Double.parseDouble(request.getParameter("rate")));
 
     Employee employee = new Employee(name, surname, address, phone, note, rate);
 
