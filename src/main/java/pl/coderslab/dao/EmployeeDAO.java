@@ -4,6 +4,7 @@ import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class EmployeeDAO {
                 String address = rs.getString(4);
                 int phone = rs.getInt(5);
                 String note = rs.getString(6);
-                float rate = rs.getFloat(7);
+                BigDecimal rate = rs.getBigDecimal(7);
 
                 result.add(new Employee(id, name, surname, address, phone, note, rate));
             }
@@ -47,7 +48,7 @@ public class EmployeeDAO {
                 String address = rs.getString(4);
                 int phone = rs.getInt(5);
                 String note = rs.getString(6);
-                float rate = rs.getFloat(7);
+                BigDecimal rate = rs.getBigDecimal(7);
                 return new Employee(id, name, surname, address, phone, note, rate);
             }
         } catch (SQLException e) {

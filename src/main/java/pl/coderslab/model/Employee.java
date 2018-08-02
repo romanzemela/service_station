@@ -1,7 +1,7 @@
 package pl.coderslab.model;
 
 
-import java.util.Objects;
+import java.math.BigDecimal;
 
 public class Employee {
 
@@ -11,9 +11,9 @@ public class Employee {
     private String address;
     private int phone;
     private String note;
-    private float rate;
+    private BigDecimal rate;
 
-    public Employee(int id, String name, String surname, String address, int phone, String note, float rate) {
+    public Employee(int id, String name, String surname, String address, int phone, String note, BigDecimal rate) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -23,7 +23,7 @@ public class Employee {
         this.rate = rate;
     }
 
-    public Employee(String name, String surname, String address, int phone, String note, float rate) {
+    public Employee(String name, String surname, String address, int phone, String note, BigDecimal rate) {
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -80,11 +80,11 @@ public class Employee {
         this.note = text;
     }
 
-    public float getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(float rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -101,24 +101,5 @@ public class Employee {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return id == employee.id &&
-                phone == employee.phone &&
-                Float.compare(employee.rate, rate) == 0 &&
-                Objects.equals(name, employee.name) &&
-                Objects.equals(surname, employee.surname) &&
-                Objects.equals(address, employee.address) &&
-                Objects.equals(note, employee.note);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, name, surname, address, phone, note, rate);
-    }
 }
 
