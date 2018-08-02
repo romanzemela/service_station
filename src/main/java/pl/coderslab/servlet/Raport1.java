@@ -14,6 +14,6 @@ public class Raport1 extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//select employees.name, employees.surname, sum(orders.working_hours) from orders join employees on employees.id = orders.employees_id group by orders.employees_id;
+        //select employees.name, employees.surname, sum(orders.working_hours) as ilosc_roboczogodzin from orders join employees on employees.id = orders.employees_id group by orders.employees_id;
     }
 }
