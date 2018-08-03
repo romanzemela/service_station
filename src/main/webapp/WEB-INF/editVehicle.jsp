@@ -23,14 +23,14 @@
             <label class="control-label col-sm-2" for="model">model:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="model" placeholder="Wpisz model..." name="model"
-                       value="${vehicle.model}" required>
+                       value="${vehicle.model}" pattern="^[a-zA-Z]{3,}" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="brand">Marka:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="brand" placeholder="Wpisz markę..." name="brand"
-                       value="${vehicle.brand}" required>
+                       value="${vehicle.brand}" pattern="^[a-zA-Z]{3,}" required>
             </div>
         </div>
         <div class="form-group">
