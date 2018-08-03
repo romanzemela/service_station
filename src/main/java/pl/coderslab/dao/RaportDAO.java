@@ -28,4 +28,17 @@ public class RaportDAO {
             throw e;
         }
     }
+
+    public static Integer getRaport2() throws SQLException {
+        String sql = "Select sum(`total_cost`) as `zyski` from `orders`";
+        try (Connection conn = DbUtil.getConn()) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            Integer zyski = rs.getInt(1);
+            return zyski;
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }
