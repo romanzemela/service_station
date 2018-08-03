@@ -36,7 +36,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="productionYear">Rok produkcji:</label>
             <div class="col-sm-2">
-                <input type="number" min="1800" max="2100" step="1" class="form-control"
+                <input type="number" min="1800" max="${maxYear}" step="1" class="form-control"
                        placeholder="Wpisz rok produkcji..." id="productionYear" name="productionYear"
                        value="${vehicle.productionYear}">
             </div>
