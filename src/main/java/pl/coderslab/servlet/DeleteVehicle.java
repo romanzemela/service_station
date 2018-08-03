@@ -27,6 +27,6 @@ public class DeleteVehicle extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("/customers");
+        response.sendRedirect("/vehicles");
     }
 }

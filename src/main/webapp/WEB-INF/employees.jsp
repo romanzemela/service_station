@@ -68,7 +68,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<a href="/employees/delete?id=${employee.id}" role="button" class="btn btn-primary btn-sm m-0">Usuń</a>-->
                 </td>
             </tr>
         </c:forEach>
