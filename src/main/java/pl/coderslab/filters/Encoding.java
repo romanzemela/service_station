@@ -28,7 +28,6 @@ public class Encoding implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-        System.out.println(req.getRequestURI());
         String path = req.getRequestURI().substring(req.getContextPath().length()).replaceAll("[/]+$", "");
 
         boolean loggedIn = (session != null && session.getAttribute("id") != null);
