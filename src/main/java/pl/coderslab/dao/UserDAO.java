@@ -13,7 +13,7 @@ import java.util.List;
 public class UserDAO {
 
     public static List<User> loadAll() throws Exception {
-        String query = "SELECT id, username, email, password FROM users";
+        String query = "SELECT `id`, `username`, `password` FROM `users`";
 
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(query);
@@ -23,10 +23,24 @@ public class UserDAO {
     }
 
     public static User loadById(int userId) throws SQLException {
-        String sql = "SELECT id, username, email, password FROM users WHERE id = ?";
+        String sql = "SELECT `id`, `username`, `password` FROM `users` WHERE `id` = ?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, userId);
+            ResultSet rs = st.executeQuery();
+            List<User> result = getUsersFromResultSet(rs);
+            if (!result.isEmpty()) {
+                return result.get(0);
+            }
+        }
+        return null;
+    }
+
+    public static User loadByUsername(String username) throws SQLException {
+        String sql = "SELECT `id`, `username`, `password` FROM `users` WHERE `username` = ?";
+        try (Connection conn = DbUtil.getConn()) {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, username);
             ResultSet rs = st.executeQuery();
             List<User> result = getUsersFromResultSet(rs);
             if (!result.isEmpty()) {
@@ -48,13 +62,12 @@ public class UserDAO {
     }
 
     private static int insert(User user) throws SQLException {
-        String sql = "INSERT INTO `users`(`username`, `email`, `password`) VALUES(?, ?, ? )";
+        String sql = "INSERT INTO `users`(`username`, `password`) VALUES(?, ? )";
         try (Connection conn = DbUtil.getConn()) {
             String[] generatedColumns = {"id"};
             PreparedStatement st = conn.prepareStatement(sql, generatedColumns);
             st.setString(1, user.getUsername());
-            st.setString(2, user.getEmail());
-            st.setString(3, user.getPassword());
+            st.setString(2, user.getPassword());
             st.executeUpdate();
             ResultSet res = st.getGeneratedKeys();
             if (res.next()) {
@@ -65,13 +78,12 @@ public class UserDAO {
     }
 
     private static int update(User user) throws SQLException {
-        String sql = "UPDATE `users` SET `username`=?, `email`=?, `password`=? WHERE `id`=?";
+        String sql = "UPDATE `users` SET `username`=?, `password`=? WHERE `id`=?";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, user.getUsername());
-            st.setString(2, user.getEmail());
-            st.setString(3, user.getPassword());
-            st.setInt(4, user.getId());
+            st.setString(2, user.getPassword());
+            st.setInt(3, user.getId());
             if (st.executeUpdate() > 0) {
                 return user.getId();
             }
@@ -81,7 +93,7 @@ public class UserDAO {
 
     public static int delete(User user) throws SQLException {
         if (user.getId() != 0) {
-            String query = "DELETE FROM users WHERE id = ?";
+            String query = "DELETE FROM `users` WHERE `id` = ?";
             try (Connection conn = DbUtil.getConn()) {
                 PreparedStatement st = conn.prepareStatement(query);
                 st.setInt(1, user.getId());
@@ -107,9 +119,8 @@ public class UserDAO {
         while (rs.next()) {
             int id = rs.getInt(1);
             String username = rs.getString(2);
-            String email = rs.getString(3);
-            String password = rs.getString(4);
-            result.add(new User(id, username, email, password));
+            String password = rs.getString(3);
+            result.add(new User(id, username, password));
         }
         return result;
     }
