@@ -41,7 +41,7 @@
                     <option value="">Wybierz pracownika</option>
                     <c:forEach items="${employees}" var="employee" varStatus="loop">
                         <c:choose>
-                            <c:when test="${employee.id == param.employeeId}">
+                            <c:when test="${employee.id == employeeId}">
                                 <option value="${employee.id}" selected>${employee.name} ${employee.surname}</option>
                             </c:when>
                             <c:otherwise>
