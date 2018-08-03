@@ -26,7 +26,8 @@ public class LoginServlet extends HttpServlet {
 
         if (user != null && UserDAO.checkPassword(user, password)) {
             session.setAttribute("id", user.getId());
-            response.sendRedirect("/");
+            String url = (String) session.getAttribute("url");
+            response.sendRedirect(url);
         } else {
             request.setAttribute("password", false);
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
