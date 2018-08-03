@@ -26,15 +26,25 @@ public class LoginServlet extends HttpServlet {
 
         if (user != null && UserDAO.checkPassword(user, password)) {
             session.setAttribute("id", user.getId());
-            response.sendRedirect("/");
+            redirect(response, session);
         } else {
             request.setAttribute("password", false);
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
 
-        protected void doGet (HttpServletRequest request, HttpServletResponse response) throws
-        ServletException, IOException {
-            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+    }
+
+    private void redirect(HttpServletResponse response, HttpSession session) throws IOException {
+        String url = (String) session.getAttribute("url");
+        if (url != null) {
+            response.sendRedirect(url);
+        } else {
+            response.sendRedirect("/");
         }
     }
+}

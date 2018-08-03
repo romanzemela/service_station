@@ -28,6 +28,7 @@ public class Encoding implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
+
         String path = req.getRequestURI().substring(req.getContextPath().length()).replaceAll("[/]+$", "");
 
         boolean loggedIn = (session != null && session.getAttribute("id") != null);
@@ -36,12 +37,22 @@ public class Encoding implements Filter {
         if (loggedIn || allowedPath) {
             chain.doFilter(req, res);
         } else {
+            session.setAttribute("url", getFullPath(req));
             res.sendRedirect("/login");
         }
     }
 
     public void init(FilterConfig config) throws ServletException {
 
+    }
+
+    private String getFullPath(HttpServletRequest request){
+        StringBuilder builder = new StringBuilder();
+        builder.append(request.getRequestURI());
+        if(request.getQueryString() != null){
+            builder.append("?").append(request.getQueryString());
+        }
+        return builder.toString();
     }
 
 }
