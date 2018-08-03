@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse response, HttpSession session) throws IOException {
-        String url = (String) session.getAttribute("url");
+        String url = (String) session.getAttribute("urlRedirect");
         if (url != null) {
             response.sendRedirect(url);
         } else {
