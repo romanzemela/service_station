@@ -15,11 +15,15 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @WebServlet("/vehicles/edit")
 public class EditVehicle extends HttpServlet {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyy-MM-dd");
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String model = request.getParameter("model");
@@ -27,7 +31,6 @@ public class EditVehicle extends HttpServlet {
         Year productionYear = Year.parse(request.getParameter("productionYear"));
         String plateNumber = request.getParameter("plateNumber");
         String nextInspectionDate = request.getParameter("nextInspectionDate");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyy-MM-dd");
         Date nextInspectionDateDate = null;
         try {
             nextInspectionDateDate = sdf.parse(nextInspectionDate);
@@ -56,6 +59,10 @@ public class EditVehicle extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
             vehicle = VehicleDAO.loadById(id);
             request.setAttribute("vehicle", vehicle);
+
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            request.setAttribute("maxYear", year);
+
             List<Customer> customers = CustomerDAO.loadAll();
             request.setAttribute("customers", customers);
             getServletContext().getRequestDispatcher("/WEB-INF/editVehicle.jsp").forward(request, response);
