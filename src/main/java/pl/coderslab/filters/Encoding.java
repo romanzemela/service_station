@@ -16,7 +16,7 @@ public class Encoding implements Filter {
     private final String ENCODING = "utf-8";
 
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-            Arrays.asList("/login", "/logout")));
+            Arrays.asList("/login", "/logout", "/favicon.ico")));
 
     public void destroy() {
     }
@@ -37,7 +37,7 @@ public class Encoding implements Filter {
         if (loggedIn || allowedPath) {
             chain.doFilter(req, res);
         } else {
-            session.setAttribute("url", getFullPath(req));
+            session.setAttribute("urlRedirect", getFullPath(req));
             res.sendRedirect("/login");
         }
     }
