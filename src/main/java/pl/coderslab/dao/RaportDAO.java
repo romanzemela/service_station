@@ -12,7 +12,7 @@ import java.util.List;
 public class RaportDAO {
     public static List<Raport1> getRaport1() throws SQLException {
 
-        String sql = "select `employees`.`name`, `employees`.`surname`, sum(`orders`.`working_hours`) as `ilosc_roboczogodzin` from `orders` join `employees` on `employees`.`id` = `orders`.`employees_id` group by `orders`.`employees_id`";
+        String sql = "select `e`.`name`, `e`.`surname`, sum(`o`.`working_hours`) as `ilosc_roboczogodzin` from `employees` `e` left join  `orders` `o` on `e`.`id` = `o`.`employees_id` group by `e`.`id` order by `ilosc_roboczogodzin` desc, `e`.`surname` asc, `e`.`name` asc";
         try (Connection conn = DbUtil.getConn()) {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

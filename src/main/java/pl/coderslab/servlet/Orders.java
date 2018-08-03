@@ -21,25 +21,35 @@ public class Orders extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Order> orders = null;
+        Integer employeeId = null;
+        List<Order> orders;
         try {
-            int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-            orders = OrderDAO.loadByEmployeeId(employeeId);
+            employeeId = Integer.parseInt(request.getParameter("employeeId"));
+            request.setAttribute("employeeId", employeeId);
         } catch (NumberFormatException ignore) {
+        }
+
+        try {
+            if (employeeId == null) {
+                orders = OrderDAO.loadAll();
+
+            } else {
+                orders = OrderDAO.loadByEmployeeId(employeeId);
+
+            }
+            request.setAttribute("orders", orders);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         try {
-            if (orders == null) {
-                orders = OrderDAO.loadAll();
-            }
             List<Employee> employees = EmployeeDAO.loadAll();
             request.setAttribute("employees", employees);
-            request.setAttribute("orders", orders);
-            getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
 
     }
 }
