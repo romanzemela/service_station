@@ -26,7 +26,7 @@
 
     <form class="form-horizontal" action="/vehicles" method="get">
         <div class="form-group col-sm-10">
-            <label class="control-label col-sm-1" for="customer">Pracownik:</label>
+            <label class="control-label col-sm-1" for="customer">Klient:</label>
             <div class="col-sm-3">
                 <select class="form-control" id="customer" name="customerId" onchange="this.form.submit()">
                     <option value=null>Wybierz klienta</option>
